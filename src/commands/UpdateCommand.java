@@ -13,7 +13,7 @@ public class UpdateCommand implements Command {
     @Override
     public void execute(String arguments) {
         int existedId = Integer.parseInt(arguments.substring(0, arguments.indexOf(" ")));
-        arguments = arguments.substring(arguments.indexOf(" "));
+        arguments = arguments.substring(arguments.indexOf(" ") + 1);
         FormedManager manager = new FormedManager();
         arrayDequeDAO.update(existedId, manager.formed(arguments));
     }

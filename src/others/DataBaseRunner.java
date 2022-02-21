@@ -13,7 +13,7 @@ enum CommandType {
     private String title;
 
     CommandType(String type) {
-
+        this.title = type;
     }
 
     public String getTitle() {
@@ -40,11 +40,12 @@ public class DataBaseRunner {
         String arguments = reader.getArguments(input);
 
         int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
-        if(Objects.equals(CommandType.valueOf(command.toUpperCase()).getTitle(), "1")) {
+        String title = CommandType.valueOf(command.toUpperCase()).getTitle();
+        if(Objects.equals(title, "1")) {
             arguments += reader.readAnotherElement();
         }
-        else if(Objects.equals(CommandType.valueOf(command.toUpperCase()).getTitle(), "2")) {
-            arguments += " " + reader.read() + " ";
+        else if(Objects.equals(title, "2")) {
+            arguments += " " + reader.read();
             arguments += reader.readAnotherElement();
         }
         commands[commandIndex].execute(arguments);
