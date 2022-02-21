@@ -1,6 +1,5 @@
 package commands;
 
-import commands.Command;
 import dao.ArrayDequeDAO;
 
 public class DeleteCommand implements Command {

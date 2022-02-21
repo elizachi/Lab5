@@ -1,8 +1,5 @@
 package handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class InputHandler {
     /**
      * Абстрактный метод read, переопределяемый для двух разных типов считывания - с консоли и с файла

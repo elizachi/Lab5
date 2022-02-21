@@ -5,10 +5,23 @@ import dao.ArrayDequeDAO;
 import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 
+import java.util.Objects;
+
 enum CommandType {
-    ADD,
-    UPDATE;
+    ADD("1"),
+    UPDATE("2");
+    private String title;
+
+    CommandType(String type) {
+
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
 }
+// TODO придумать что сделать с разными по параметрам командами
 public class DataBaseRunner {
 
     public static void main(String [] args) {
@@ -24,14 +37,14 @@ public class DataBaseRunner {
         InputHandler reader = new ConsoleInputHandler();
         String input = reader.read();
         String command = InputHandler.getFirstWord(input);
-
-        InputHandler[] handler = {
-
-        };
-
         String arguments = reader.getArguments(input);
+
         int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
-        if(commandIndex < 5) {
+        if(Objects.equals(CommandType.valueOf(command.toUpperCase()).getTitle(), "1")) {
+            arguments += reader.readAnotherElement();
+        }
+        else if(Objects.equals(CommandType.valueOf(command.toUpperCase()).getTitle(), "2")) {
+            arguments += " " + reader.read() + " ";
             arguments += reader.readAnotherElement();
         }
         commands[commandIndex].execute(arguments);

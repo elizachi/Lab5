@@ -1,6 +1,5 @@
 package commands;
 
-import commands.Command;
 import dao.ArrayDequeDAO;
 
 public class ReadCommand implements Command {

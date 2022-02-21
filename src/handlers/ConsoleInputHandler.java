@@ -1,7 +1,5 @@
 package handlers;
 
-import handlers.InputHandler;
-
 import java.util.Scanner;
 
 public class ConsoleInputHandler extends InputHandler {

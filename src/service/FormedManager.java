@@ -9,9 +9,6 @@ public class FormedManager {
 
     public HumanBeing formed(String arguments) {
         String[] fields = arguments.split(" ");
-        if(fields.length == 12) {
-
-        }
         return new HumanBeing(
                 fields[0],
                 fields[1],
