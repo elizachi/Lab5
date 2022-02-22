@@ -1,4 +1,4 @@
-package human_being;
+package source;
 
 public class Car implements Comparable {
     private String name; //Поле может быть null

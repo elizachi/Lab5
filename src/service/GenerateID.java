@@ -1,11 +1,11 @@
 package service;
 
-import human_being.HumanBeing;
+import source.HumanBeing;
 
-import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class GenerateID {
-    public GenerateID(ArrayDeque<HumanBeing> humanCollection, HumanBeing human){
+    public GenerateID(Deque<HumanBeing> humanCollection, HumanBeing human){
         human.setId(humanCollection.size() + 1);
     }
 }

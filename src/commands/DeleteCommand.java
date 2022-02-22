@@ -3,7 +3,7 @@ package commands;
 import dao.ArrayDequeDAO;
 
 public class DeleteCommand implements Command {
-    ArrayDequeDAO arrayDequeDAO;
+    private final ArrayDequeDAO arrayDequeDAO;
 
     public DeleteCommand(ArrayDequeDAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;

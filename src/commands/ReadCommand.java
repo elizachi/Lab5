@@ -3,7 +3,7 @@ package commands;
 import dao.ArrayDequeDAO;
 
 public class ReadCommand implements Command {
-    ArrayDequeDAO arrayDequeDAO;
+    private final ArrayDequeDAO arrayDequeDAO;
 
     public ReadCommand(ArrayDequeDAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;

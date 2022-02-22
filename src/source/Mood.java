@@ -1,4 +1,4 @@
-package human_being;
+package source;
 
 public enum Mood {
     SADNESS,

@@ -1,4 +1,4 @@
-package human_being;
+package source;
 
 import java.time.LocalDate;
 
@@ -153,11 +153,5 @@ public class HumanBeing implements Comparable {
             }
         }
         return result;
-    }
-    // TODO переопределить нормально
-    public String toString() {
-        System.out.print(name + soundtrackName + minutesOfWaiting + impactSpeed + realHero + hasToothpick +
-                coordinates+ mood + car);
-        return null;
     }
 }

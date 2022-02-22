@@ -1,20 +1,18 @@
 package dao;
 
-import human_being.HumanBeing;
+import source.HumanBeing;
 import service.GenerateID;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
-public class ArrayDequeDAO implements DAO {
+public final class ArrayDequeDAO implements DAO {
     /**
      * ЗДЕСЬ ВСЕ БУДЕТ ПРОСТО ВЫПОЛНЯТЬСЯ БЕЗ ПРОВЕРОК ИЛИ ОБРАБОТКИ КАК ЭТО ЕСТЬ У ЕГОШИНА
      */
     private static int availableId = 1;
-    private final ArrayDeque<HumanBeing> humanCollection = new ArrayDeque<>();
+    private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
 
-    public void update() {
-        System.out.print("Update...");
-    }
     public void read() {
         System.out.print("Select...");
     }
@@ -41,7 +39,7 @@ public class ArrayDequeDAO implements DAO {
      */
     @Override
     public void update(int id, HumanBeing updatedHuman) {
-        HumanBeing existedHuman = get(updatedHuman.getId());
+        HumanBeing existedHuman = get(id);
         if(existedHuman != null) {
             existedHuman.setName(updatedHuman.getName());
             existedHuman.setSoundtrackName(updatedHuman.getSoundtrackName());

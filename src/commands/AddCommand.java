@@ -1,7 +1,7 @@
 package commands;
 
 import dao.ArrayDequeDAO;
-import human_being.HumanBeing;
+import source.HumanBeing;
 import service.FormedManager;
 
 /**

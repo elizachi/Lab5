@@ -4,7 +4,7 @@ import dao.ArrayDequeDAO;
 import service.FormedManager;
 
 public class UpdateCommand implements Command {
-    ArrayDequeDAO arrayDequeDAO;
+    private final ArrayDequeDAO arrayDequeDAO;
 
     public UpdateCommand(ArrayDequeDAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
@@ -12,6 +12,7 @@ public class UpdateCommand implements Command {
 
     @Override
     public void execute(String arguments) {
+
         int existedId = Integer.parseInt(arguments.substring(0, arguments.indexOf(" ")));
         arguments = arguments.substring(arguments.indexOf(" ") + 1);
         FormedManager manager = new FormedManager();

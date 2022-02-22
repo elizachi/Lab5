@@ -1,6 +1,6 @@
 package dao;
 
-import human_being.HumanBeing;
+import source.HumanBeing;
 
 public interface DAO {
     int add(HumanBeing human);

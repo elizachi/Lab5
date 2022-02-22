@@ -1,4 +1,4 @@
-package human_being;
+package source;
 
 public class Coordinates {
     private final int x;

@@ -1,9 +1,9 @@
 package service;
 
-import human_being.Car;
-import human_being.Coordinates;
-import human_being.HumanBeing;
-import human_being.Mood;
+import source.Car;
+import source.Coordinates;
+import source.HumanBeing;
+import source.Mood;
 
 public class FormedManager {
 
