@@ -28,7 +28,7 @@ public final class ArrayDequeDAO implements DAO {
     @Override
     public int add(HumanBeing newHuman) {
         humanCollection.add(newHuman);
-        new GenerateID(humanCollection, newHuman);
+        new GenerateID(newHuman);
         return availableId++;
     }
 
