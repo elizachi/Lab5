@@ -1,10 +1,12 @@
 package handlers;
 
+import java.util.ArrayList;
+
 public abstract class InputHandler {
     /**
      * Абстрактный метод read, переопределяемый для двух разных типов считывания - с консоли и с файла
      */
-    public abstract String read();
+    public abstract ArrayList read();
     /**
      *Убирает лишние пробелы из полученной строки для дальнейшей обработки
      * @param input  - только что введённая строка
@@ -30,15 +32,15 @@ public abstract class InputHandler {
      * Считывает оставшиеся элементы
      * @return
      */
-    public String readAnotherElement() {
-        System.out.print("Введите координаты:\n");
-        String coord = read();
-        System.out.print("Введите состояние персонажа:\n");
-        String mood = read();
-        System.out.print("Введите машину персонажа:\n");
-        String car = read();
-        return " " + coord + " " + mood + " " + car;
-    }
+//    public String readAnotherElement() {
+//        System.out.print("Введите координаты:\n");
+//        String coord = read();
+//        System.out.print("Введите состояние персонажа:\n");
+//        String mood = read();
+//        System.out.print("Введите машину персонажа:\n");
+//        String car = read();
+//        return " " + coord + " " + mood + " " + car;
+//    }
 
     /**
      * Обрезка строки без первого слова для дальнейшей работы

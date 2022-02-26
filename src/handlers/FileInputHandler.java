@@ -1,8 +1,10 @@
 package handlers;
 
+import java.util.ArrayList;
+
 public class FileInputHandler extends InputHandler {
     @Override
-    public String read() {
+    public ArrayList read() {
         return null;
     }
 }
