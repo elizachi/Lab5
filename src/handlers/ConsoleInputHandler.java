@@ -11,7 +11,7 @@ public class ConsoleInputHandler extends InputHandler {
      * @return считанная строка без лишних пробелов
      */
     @Override
-    public ArrayList read() {
+    public ArrayList<String> read() {
         String input = removeSpaces(scanner.nextLine());
         if(input.isEmpty()) {
             throw new RuntimeException("Пустой ввод!");

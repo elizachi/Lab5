@@ -19,8 +19,7 @@ public class HumanBeing implements Comparable {
 
 
     public HumanBeing(String name, String soundtrackName, Long minutesOfWaiting, int impactSpeed,
-                      boolean realHero, boolean hasToothpick, Coordinates coordinates,
-                      Mood mood, Car car) {
+                      boolean realHero, boolean hasToothpick, Coordinates coordinates, Mood mood, Car car) {
         this.name = name;
         this.soundtrackName = soundtrackName;
         this.minutesOfWaiting = minutesOfWaiting;

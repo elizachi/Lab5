@@ -4,6 +4,8 @@ import dao.ArrayDequeDAO;
 import dao.DAO;
 import service.FormedManager;
 
+import java.util.ArrayList;
+
 public class UpdateCommand implements Command {
     private final DAO arrayDequeDAO;
 
@@ -12,11 +14,14 @@ public class UpdateCommand implements Command {
     }
 
     @Override
-    public void execute(String arguments) {
+    public void execute(ArrayList arguments) {
 
-        int existedId = Integer.parseInt(arguments.substring(0, arguments.indexOf(" ")));
-        arguments = arguments.substring(arguments.indexOf(" ") + 1);
-        FormedManager manager = new FormedManager();
-        arrayDequeDAO.update(existedId, manager.formed(arguments));
+//
+    }
+
+
+    @Override
+    public boolean isCorrect(ArrayList<String> arguments) {
+        return false;
     }
 }
