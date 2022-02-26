@@ -1,12 +1,13 @@
 package commands;
 
 import dao.ArrayDequeDAO;
+import dao.DAO;
 import service.FormedManager;
 
 public class UpdateCommand implements Command {
-    private final ArrayDequeDAO arrayDequeDAO;
+    private final DAO arrayDequeDAO;
 
-    public UpdateCommand(ArrayDequeDAO arrayDequeDAO) {
+    public UpdateCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
     }
 

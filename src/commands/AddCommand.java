@@ -1,6 +1,7 @@
 package commands;
 
 import dao.ArrayDequeDAO;
+import dao.DAO;
 import source.HumanBeing;
 import service.FormedManager;
 
@@ -8,9 +9,9 @@ import service.FormedManager;
  * ЗДЕСЬ БУДЕТ ПОЛНАЯ ОБРАБОТКА ВХОДНЫХ ДАННЫХ С ФОРМИРОВАНИЕМ ЭЛЕМЕНТОВ
  */
 public class AddCommand implements Command {
-    private final ArrayDequeDAO arrayDequeDAO;
+    private final DAO arrayDequeDAO;
 
-    public AddCommand(ArrayDequeDAO arrayDequeDAO) {
+    public AddCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
     }
 
