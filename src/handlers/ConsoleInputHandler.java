@@ -5,21 +5,19 @@ import java.util.Scanner;
 
 public class ConsoleInputHandler extends InputHandler {
     private final Scanner scanner = new Scanner(System.in);
-    private ArrayList<String> data_in = new ArrayList<>();
     /**
      * Переопределённый метод для считывания с консоли
      * @return считанная строка без лишних пробелов
      */
     @Override
-    public ArrayList<String> read() {
-        String input = removeSpaces(scanner.nextLine());
+    public String read(boolean is) {
+        // ВНИМАНИЕ!!!! Считывает не строку целиколм, а просто следующее слово!!!
+        String input;
+        if(!is) scanner.nextLine();
+        input = removeSpaces(scanner.next());
         if(input.isEmpty()) {
             throw new RuntimeException("Пустой ввод!");
         }
-        while (!input.isEmpty()) {
-            data_in.add(input);
-            input = removeSpaces(scanner.nextLine());
-        }
-        return data_in;
+        return input;
     }
 }

@@ -2,6 +2,7 @@ package commands;
 
 import dao.ArrayDequeDAO;
 import dao.DAO;
+import handlers.InputHandler;
 
 import java.util.ArrayList;
 
@@ -13,13 +14,8 @@ public class ReadCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayList arguments) {
+    public void execute(InputHandler reader) {
         // если айдишка есть то все ок
         //arrayDequeDAO.read();
-    }
-
-    @Override
-    public boolean isCorrect(ArrayList<String> arguments) {
-        return false;
     }
 }

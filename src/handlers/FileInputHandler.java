@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class FileInputHandler extends InputHandler {
     @Override
-    public ArrayList read() {
+    public String read(boolean is) {
         return null;
     }
 }

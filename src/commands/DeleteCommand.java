@@ -2,6 +2,7 @@ package commands;
 
 import dao.ArrayDequeDAO;
 import dao.DAO;
+import handlers.InputHandler;
 
 import java.util.ArrayList;
 
@@ -13,14 +14,8 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayList arguments) {
+    public void execute(InputHandler reader) {
         // если элемент есть то все ок
         //arrayDequeDAO.delete();
-    }
-
-
-    @Override
-    public boolean isCorrect(ArrayList<String> arguments) {
-        return false;
     }
 }

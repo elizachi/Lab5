@@ -6,7 +6,7 @@ public abstract class InputHandler {
     /**
      * Абстрактный метод read, переопределяемый для двух разных типов считывания - с консоли и с файла
      */
-    public abstract ArrayList read();
+    public abstract String read(boolean is);
     /**
      *Убирает лишние пробелы из полученной строки для дальнейшей обработки
      * @param input  - только что введённая строка
