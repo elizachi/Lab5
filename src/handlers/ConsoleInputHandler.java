@@ -1,6 +1,5 @@
 package handlers;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleInputHandler extends InputHandler {
@@ -12,9 +11,9 @@ public class ConsoleInputHandler extends InputHandler {
     @Override
     public String read(boolean is) {
         // ВНИМАНИЕ!!!! Считывает не строку целиколм, а просто следующее слово!!!
-        String input;
+        // механизм пропускает остальную информацию введенною в строку, если подано false и переходит на след. строку
         if(!is) scanner.nextLine();
-        input = removeSpaces(scanner.next());
+        String input = removeSpaces(scanner.next());
         if(input.isEmpty()) {
             throw new RuntimeException("Пустой ввод!");
         }

@@ -9,7 +9,7 @@ import handlers.InputHandler;
  */
 public class CommandManager {
     private static final DAO database = new ArrayDequeDAO();
-    private final InputHandler reader;
+    private InputHandler reader;
 
     private final Command[] commands = {
             new AddCommand(database),
@@ -19,6 +19,14 @@ public class CommandManager {
     };
 
     public CommandManager(InputHandler reader) {
+        this.reader = reader;
+    }
+
+    /**
+     * Если нам надо поменять тип считывания, то мы делаем это здесь
+     * @param reader
+     */
+    public void setReader(InputHandler reader) {
         this.reader = reader;
     }
 
