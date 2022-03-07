@@ -1,5 +1,11 @@
 Формат ввода команд:
-COMMAND <name> <sountrackName> <minutesOfWaiting> <impactSpeed> <realHero> <hasToothpick>
+COMMAND
+<name>
+<sountrackName>
+<minutesOfWaiting>
+<impactSpeed>
+<realHero>
+<hasToothpick>
 <x> <y>
 <mood>
 <carName> <cool>
@@ -36,6 +42,3 @@ sadness
 McQueen True
 
 Тест 4:
-Тест 3
-Тест 1
-

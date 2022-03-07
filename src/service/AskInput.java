@@ -1,7 +1,6 @@
 package service;
 
 import handlers.InputHandler;
-import human_being.Coordinates;
 
 /**
  * Класс, позволяющий переключать дружелюбный интерфейс для быстрой отладки
