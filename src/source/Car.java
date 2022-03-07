@@ -9,9 +9,25 @@ public class Car implements Comparable {
         this.cool = cool;
     }
 
-    Car(boolean cool){
+    public Car(boolean cool){
         this.name = null;
         this.cool = cool;
+    }
+
+    public void setCarName(String name) {
+        this.name = name;
+    }
+
+    public void setCarCool(boolean cool) {
+        this.cool = cool;
+    }
+
+    public String getCarName() {
+        return name;
+    }
+
+    public Boolean getCarCool(){
+        return cool;
     }
 
     @Override

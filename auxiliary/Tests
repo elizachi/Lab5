@@ -4,11 +4,11 @@ COMMAND
 <sountrackName>
 <minutesOfWaiting>
 <impactSpeed>
-<realHero>
-<hasToothpick>
+<realHero>     //может быть null
+<hasToothpick> //может быть null
 <x> <y>
-<mood>
-<carName> <cool>
+<mood>         //может быть null
+<carName>      //может быть null <cool>
 
 Тест 1:
 add

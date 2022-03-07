@@ -1,7 +1,7 @@
 package dao;
 
 import source.HumanBeing;
-import service.GenerateID;
+import service.Generator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -12,6 +12,7 @@ public final class ArrayDequeDAO implements DAO {
      */
     private static int availableId = 1;
     private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
+    private Generator generator = new Generator();
 
     public void read() {
         System.out.print("Select...");
@@ -28,7 +29,8 @@ public final class ArrayDequeDAO implements DAO {
     @Override
     public int add(HumanBeing newHuman) {
         humanCollection.add(newHuman);
-        new GenerateID(newHuman);
+        generator.generateID(newHuman);
+        generator.generateCreationDate(newHuman);
         return availableId++;
     }
 

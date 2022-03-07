@@ -10,7 +10,7 @@ public class ConsoleInputHandler extends InputHandler {
      */
     @Override
     public String read(boolean is) {
-        // ВНИМАНИЕ!!!! Считывает не строку целиколм, а просто следующее слово!!!
+        // ВНИМАНИЕ!!!! Считывает не строку целиком, а просто следующее слово!!!
         // механизм пропускает остальную информацию введенною в строку, если подано false и переходит на след. строку
         if(!is) scanner.nextLine();
         String input = removeSpaces(scanner.next());
