@@ -120,7 +120,9 @@ public class HumanBeing implements Comparable {
         return car;
     }
 
-    // переобределение метода compareTo для сортировки
+    /**
+     * переобределение метода compareTo для сортировки
+     */
     @Override
     public int compareTo(Object o) {
         if (o == null){
