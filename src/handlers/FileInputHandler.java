@@ -3,13 +3,15 @@ package handlers;
 import java.io.*;
 
 public class FileInputHandler extends InputHandler {
+    StringBuilder string = new StringBuilder();
     /**
      * Переопределённый метод для считывания с файла
      */
     @Override
     public String read(boolean is) {
-        StringBuilder string = new StringBuilder();
         try {
+            int length = string.length();
+            string.delete(0, length);
             String link = this.toString();
             File file = new File(link);
             FileReader fileReader = new FileReader(file);
