@@ -1,8 +1,11 @@
 package service;
 
+import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 import source.Car;
 import source.Mood;
+
+import java.util.Locale;
 
 /**
  * Класс, позволяющий переключать дружелюбный интерфейс для быстрой отладки
@@ -10,12 +13,8 @@ import source.Mood;
  */
 public class AskInput {
     private static boolean friendlyInterface;
-    private InputHandler inputHandler;
+    private InputHandler inputHandler = new ConsoleInputHandler();
     private Boolean booleanInput;
-
-    public AskInput(InputHandler inputHandler) {
-        this.inputHandler = inputHandler;
-    }
 
     public void setInputHandler(InputHandler inputHandler){
         this.inputHandler = inputHandler;
@@ -27,15 +26,15 @@ public class AskInput {
      */
     public void turnOnFriendly() throws RuntimeException {
         System.out.println("Включить дружелюбный интерфейс?");
-        String input = inputHandler.read(true);
-        input = input.toLowerCase();
+        String input = inputHandler.read(true).toLowerCase();
         try {
             if (input.equals("true") || input.equals("yes") || input.equals("да")) {
                 friendlyInterface = true;
             } else if (input.equals("false") || input.equals("no") || input.equals("нет")) {
                 friendlyInterface = false;
             } else {
-                throw new RuntimeException("Вы что-то не то ввели, пожалуйста, повторите попытку.");
+                throw new RuntimeException("Вы что-то не то ввели, пожалуйста, повторите попытку.\n" +
+                        "Вы можете ввести следующее: \"да\" \"yes\" \"true\" \"нет\" \"no\" \"false\"\n\n");
             }
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

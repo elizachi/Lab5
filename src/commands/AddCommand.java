@@ -17,7 +17,7 @@ public class AddCommand implements Command {
 
     /**
      * Обработка поступивших паратемтров и добавление их в коллекцию
-     * @param arguments - все аргументы, нужные для формирования аргумента, в виде строки
+     * @param reader - экземпляр класса InputHandler который определяет тип считывания
      */
     @Override
     public void execute(InputHandler reader) {
