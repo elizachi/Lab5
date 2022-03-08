@@ -3,6 +3,7 @@ package service;
 import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 import source.Car;
+import source.Coordinates;
 import source.Mood;
 
 import java.util.Locale;
@@ -59,22 +60,24 @@ public class AskInput {
      * @return возвращает введенную строку
      * @throws RuntimeException если неверно введены координаты
      */
-    public String askCoordinates() throws RuntimeException {
+    public Coordinates askCoordinates() throws RuntimeException {
         printMessage("Введите координаты: ");
         String input = inputHandler.read(true);
+        int x = 0;
+        float y = 0;
         try {
             if (!(input.contains(" "))) {
                 throw new RuntimeException("Пожалуйста, введите координаты через пробел.");
             }
-            int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
-            Float y = Float.parseFloat(input);
+            x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
+            y = Float.parseFloat(input);
         } catch (RuntimeException e) {
             if (friendlyInterface) {
                 System.out.println(e.getMessage());
                 askCoordinates();
             }
         }
-        return input;
+        return new Coordinates(x, y);
     }
 
     public Boolean askRealHero() throws RuntimeException {
