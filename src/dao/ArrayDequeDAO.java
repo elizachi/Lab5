@@ -31,6 +31,7 @@ public final class ArrayDequeDAO implements DAO {
         humanCollection.add(newHuman);
         generator.generateID(newHuman);
         generator.generateCreationDate(newHuman);
+        System.out.print("Ура Ура! Элемент добавлен в коллекцию!");
         return availableId++;
     }
 

@@ -12,8 +12,8 @@ public class ConsoleInputHandler extends InputHandler {
     public String read(boolean is) {
         // ВНИМАНИЕ!!!! Считывает не строку целиком, а просто следующее слово!!!
         // механизм пропускает остальную информацию введенною в строку, если подано false и переходит на след. строку
-        if(!is) scanner.nextLine();
         String input = removeSpaces(scanner.next());
+        if(!is) if(scanner.hasNextLine()) scanner.nextLine();
         if(input.isEmpty()) {
             throw new RuntimeException("Пустой ввод!");
         }

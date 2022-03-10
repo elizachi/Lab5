@@ -1,27 +1,22 @@
 package service;
 
-import source.Car;
-import source.Coordinates;
+import handlers.InputHandler;
 import source.HumanBeing;
-import source.Mood;
 
 public class FormedManager {
+    private final AskInput request = new AskInput();
 
-    public HumanBeing formed(String arguments) {
-        String[] fields = arguments.split(" ");
-        for (String field : fields) {
-            System.out.print(field + " ");
-        }
+    public HumanBeing formed(InputHandler reader) {
         return new HumanBeing(
-                fields[0],
-                fields[1],
-                Long.parseLong(fields[2]),
-                Integer.parseInt(fields[3]),
-                Boolean.parseBoolean(fields[4]),
-                Boolean.parseBoolean(fields[5]),
-                new Coordinates(Integer.parseInt(fields[6]), Float.parseFloat(fields[7])),
-                Mood.valueOf(fields[8].toUpperCase()),
-                new Car(fields[9], Boolean.parseBoolean(fields[10]))
+                request.askName(reader),
+                request.askSoundtrackName(reader),
+                request.askMinutesOfWaiting(reader),
+                request.askImpactSpeed(reader),
+                request.askRealHero(reader),
+                request.askHasToothpick(reader),
+                request.askCoordinates(reader),
+                request.askMood(reader),
+                request.askCar(reader)
         );
     }
 

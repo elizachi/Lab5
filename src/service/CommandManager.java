@@ -39,7 +39,7 @@ public class CommandManager {
             int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
             commands[commandIndex].execute(reader);
         } catch(IllegalArgumentException e) {
-            System.err.print("Команада введена неверно. Пожалуйста, повторите попытку.\n");
+            System.err.print("Команада введена неверно. Повторите попытку.\n");
             start(false);
         }
     }
