@@ -6,6 +6,11 @@ import source.Car;
 import source.Coordinates;
 import source.Mood;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.NoSuchElementException;
+
 /**
  * Класс, позволяющий переключать дружелюбный интерфейс для быстрой отладки
  * а также сразу обрабатывающий строку на наличие ошибок
@@ -44,6 +49,11 @@ public class AskInput {
         friendlyInterface = false;
     }
 
+    /**
+     * Метод, запрашивающий ввод поля "name"
+     * @param in
+     * @return
+     */
     public String askName(InputHandler in) {
         printMessage("Введите имя: ");
         return in.read(false);
@@ -136,6 +146,19 @@ public class AskInput {
         String input_name = in.read(true);
         String input_cool = in.read(false);
         return new Car(input_name, Boolean.parseBoolean(input_cool));
+    }
+
+    public String askFileName(InputHandler in) {
+        String fileName = in.read(false);
+        File file = new File(fileName);
+        try {
+            if(!file.exists()) throw new FileNotFoundException("Файл не найден.\n");
+            if(file.length() == 0) throw new NoSuchElementException("Файл пуст.\n");
+            if(!file.canRead()) throw new IOException("Нет прав на чтение.\n");
+        } catch(NoSuchElementException | IOException e) {
+            System.err.print(e.getMessage());
+        }
+        return fileName;
     }
 
     /**

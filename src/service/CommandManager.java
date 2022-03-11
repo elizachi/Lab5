@@ -15,6 +15,7 @@ public class CommandManager {
     private static final Command[] commands = {
             new AddCommand(database),
             new UpdateCommand(database),
+            new ScriptCommand(),
             new ReadCommand(database),
             new DeleteCommand(database)
     };
@@ -47,5 +48,6 @@ public class CommandManager {
 }
 enum CommandType {
     ADD,
-    UPDATE;
+    UPDATE,
+    EXECUTE_SCRIPT;
 }
