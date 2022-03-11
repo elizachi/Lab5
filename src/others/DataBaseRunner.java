@@ -11,7 +11,7 @@ public class DataBaseRunner {
         // считывать начинаем с консоли
         CommandManager.turnOnConsole();
         // запускаем менеджер-определитель команды
-        CommandManager.start(true);
+        CommandManager.start();
     }
 
 }

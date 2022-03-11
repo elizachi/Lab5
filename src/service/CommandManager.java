@@ -32,18 +32,13 @@ public class CommandManager {
         AskInput.turnOffFriendly();
     }
 
-    public static void start(boolean is) {
-        whichCommand(reader.read(is));
+    public static void start() {
+        whichCommand(AskInput.askCommand(reader));
     }
     private static void whichCommand(String command) {
-        try {
-            int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
-            commands[commandIndex].execute(reader);
-            start(false);
-        } catch(IllegalArgumentException e) {
-            System.err.print("Команада введена неверно. Повторите попытку.\n");
-            start(false);
-        }
+        int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
+        commands[commandIndex].execute(reader);
+        start();
     }
 }
 enum CommandType {

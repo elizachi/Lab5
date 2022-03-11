@@ -49,6 +49,20 @@ public class AskInput {
         friendlyInterface = false;
     }
 
+    public static String askCommand(InputHandler in) {
+        String command = null;
+        while(command == null) {
+            printMessage("Введите команду:\n");
+            command = in.read(true);
+            try {
+                CommandType.valueOf(command.toUpperCase()).ordinal();
+            } catch(IllegalArgumentException e) {
+                System.err.print("Команада введена неверно. Повторите попытку.\n");
+                command = null;
+            }
+        }
+        return command;
+    }
     /**
      * Метод, запрашивающий ввод поля "name"
      * @param in
@@ -178,7 +192,7 @@ public class AskInput {
      * Внутренний метод для вывода сообщения относительно friendlyInterface
      * @param message строка, которая будет напечатана, если дружественный интерфейс включен
      */
-    private void printMessage(String message){
+    private static void printMessage(String message){
         if (friendlyInterface) {
             System.out.println(message);
         }
