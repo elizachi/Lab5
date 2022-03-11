@@ -31,13 +31,13 @@ public class CommandManager {
     }
 
     public void start(boolean is) {
-        System.out.print("Пожалуйста, введите команду.\n");
         whichCommand(reader.read(is));
     }
     private void whichCommand(String command) {
         try {
             int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
             commands[commandIndex].execute(reader);
+            start(false);
         } catch(IllegalArgumentException e) {
             System.err.print("Команада введена неверно. Повторите попытку.\n");
             start(false);

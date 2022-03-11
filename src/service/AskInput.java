@@ -14,18 +14,13 @@ import java.util.Locale;
  */
 public class AskInput {
     private static boolean friendlyInterface;
-    //private InputHandler inputHandler = new ConsoleInputHandler();
     private Boolean booleanInput;
-
-//    public void setInputHandler(InputHandler inputHandler){
-//        this.inputHandler = inputHandler;
-//    }
 
     /**
      * Метод, позволяющй включить дружелюбный интерфейс
      * @throws RuntimeException
      */
-    public void turnOnFriendly() throws RuntimeException {
+    public static void turnOnFriendly() throws RuntimeException {
         InputHandler inputHandler = new ConsoleInputHandler();
         System.out.println("Включить дружелюбный интерфейс?");
         String input = inputHandler.read(false).toLowerCase();
@@ -47,7 +42,7 @@ public class AskInput {
     /**
      * Метод, позволяющий выключить дружелюбный интерфейс
      */
-    public void turnOffFriendly(){
+    public static void turnOffFriendly(){
         friendlyInterface = false;
     }
 
