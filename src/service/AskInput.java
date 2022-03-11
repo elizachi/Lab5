@@ -6,8 +6,6 @@ import source.Car;
 import source.Coordinates;
 import source.Mood;
 
-import java.util.Locale;
-
 /**
  * Класс, позволяющий переключать дружелюбный интерфейс для быстрой отладки
  * а также сразу обрабатывающий строку на наличие ошибок

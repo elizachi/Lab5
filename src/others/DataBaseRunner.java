@@ -9,10 +9,10 @@ public class DataBaseRunner {
     public static void main(String [] args) {
         // определяем нужен ли нам дружественный интерфейс
         AskInput.turnOnFriendly();
-        // начинаем со считывания с консоли
-        CommandManager manager = new CommandManager(new ConsoleInputHandler());
+        // считывать начинаем с консоли
+        CommandManager.turnOnConsole();
         // запускаем менеджер-определитель команды
-        manager.start(true);
+        CommandManager.start(true);
     }
 
 }

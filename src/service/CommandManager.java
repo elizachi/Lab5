@@ -2,6 +2,7 @@ package service;
 
 import commands.*;
 import dao.*;
+import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 
 /**
@@ -9,31 +10,31 @@ import handlers.InputHandler;
  */
 public class CommandManager {
     private static final DAO database = new ArrayDequeDAO();
-    private InputHandler reader;
+    private static InputHandler reader;
 
-    private final Command[] commands = {
+    private static final Command[] commands = {
             new AddCommand(database),
             new UpdateCommand(database),
             new ReadCommand(database),
             new DeleteCommand(database)
     };
 
-    public CommandManager(InputHandler reader) {
-        this.reader = reader;
-    }
-
     /**
      * Если нам надо поменять тип считывания, то мы делаем это здесь
-     * @param reader
      */
-    public void setReader(InputHandler reader) {
-        this.reader = reader;
+    public static void turnOnConsole() {
+        reader = new ConsoleInputHandler();
     }
 
-    public void start(boolean is) {
+    public static void turnOnFile() {
+        reader = new ConsoleInputHandler();
+        AskInput.turnOffFriendly();
+    }
+
+    public static void start(boolean is) {
         whichCommand(reader.read(is));
     }
-    private void whichCommand(String command) {
+    private static void whichCommand(String command) {
         try {
             int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
             commands[commandIndex].execute(reader);
