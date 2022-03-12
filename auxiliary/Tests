@@ -18,16 +18,25 @@ nyan-cat
 12
 True
 True
-4 5.123
+4
+5.123
 sadness
-McQueen True
+McQueen
+True
 
 Тест 2:
-update 1
-dog piesek 2 15 True False
+update
+1
+dog
+piesek
+2
+15
+True
+False
 4 6.22
 longing
-BrokeCar False
+BrokeCar
+False
 
 Тест 3:
 add
@@ -37,9 +46,11 @@ five
 12
 True
 True
-4 5.123
+4
+5.123
 sadness
-McQueen True
+McQueen
+True
 
 Тест 4:
 add

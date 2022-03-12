@@ -26,7 +26,7 @@ public class AskInput {
     public static void turnOnFriendly() throws RuntimeException {
         InputHandler inputHandler = new ConsoleInputHandler();
         System.out.println("Включить дружелюбный интерфейс?");
-        String input = inputHandler.read(false).toLowerCase();
+        String input = inputHandler.read().toLowerCase();
         try {
             if (input.equals("true") || input.equals("yes") || input.equals("да")) {
                 friendlyInterface = true;
@@ -53,7 +53,7 @@ public class AskInput {
         String command = null;
         while(command == null) {
             printMessage("Введите команду:\n");
-            command = in.read(true);
+            command = in.read();
             try {
                 CommandType.valueOf(command.toUpperCase()).ordinal();
             } catch(IllegalArgumentException e) {
@@ -63,6 +63,11 @@ public class AskInput {
         }
         return command;
     }
+
+    public static int askId(InputHandler in) {
+        printMessage("Введите id: ");
+        return Integer.parseInt(in.read());
+    }
     /**
      * Метод, запрашивающий ввод поля "name"
      * @param in
@@ -70,7 +75,7 @@ public class AskInput {
      */
     public String askName(InputHandler in) {
         printMessage("Введите имя: ");
-        return in.read(false);
+        return in.read();
     }
 
     /**
@@ -80,8 +85,8 @@ public class AskInput {
      */
     public Coordinates askCoordinates(InputHandler in) throws RuntimeException {
         printMessage("Введите координаты: ");
-        String input_x = in.read(true);
-        String input_y = in.read(false);
+        String input_x = in.read();
+        String input_y = in.read();
         int x = 0;
         float y = 0;
         try {
@@ -98,7 +103,7 @@ public class AskInput {
 
     public Boolean askRealHero(InputHandler in) throws RuntimeException {
         printMessage("Является ли этот человек настоящим героем?");
-        String input = in.read(false);
+        String input = in.read();
         input = input.toLowerCase();
         try {
             if (input.contains("true") || input.contains("yes") || input.contains("да")) {
@@ -120,7 +125,7 @@ public class AskInput {
     @SuppressWarnings("DuplicatedCode")
     public Boolean askHasToothpick(InputHandler in) throws RuntimeException {
         printMessage("Есть ли у человека зубная щётка?");
-        String input = in.read(false);
+        String input = in.read();
         try {
             booleanInput = getBooleanInput(input);
         } catch (RuntimeException e){
@@ -134,36 +139,36 @@ public class AskInput {
 
     public int askImpactSpeed(InputHandler in) {
         printMessage("Введите скорость:");
-        String input = in.read(false);
+        String input = in.read();
         return Integer.parseInt(input);
     }
 
     public String askSoundtrackName(InputHandler in) throws RuntimeException {
         printMessage("Введите название саундтрека:");
-        return in.read(false);
+        return in.read();
     }
 
     public Long askMinutesOfWaiting(InputHandler in){
         printMessage("Введите минуты ожидания:");
-        String input = in.read(false);
+        String input = in.read();
         return Long.getLong(input);
     }
 
     public Mood askMood(InputHandler in){
         printMessage("Введите состояние персонажа:");
-        String string = in.read(false).toUpperCase();
+        String string = in.read().toUpperCase();
         return Mood.valueOf(string);
     }
 
     public Car askCar(InputHandler in){
         printMessage("Введите, какая машина будет у данного персонажа:");
-        String input_name = in.read(true);
-        String input_cool = in.read(false);
+        String input_name = in.read();
+        String input_cool = in.read();
         return new Car(input_name, Boolean.parseBoolean(input_cool));
     }
 
     public String askFileName(InputHandler in) {
-        String fileName = in.read(false);
+        String fileName = in.read();
         File file = new File(fileName);
         try {
             if(!file.exists()) throw new FileNotFoundException("Файл не найден.\n");

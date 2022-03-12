@@ -3,6 +3,7 @@ package commands;
 import dao.DAO;
 import handlers.InputHandler;
 import service.FormedManager;
+import source.HumanBeing;
 
 /**
  * Класс команды add. Добавляет новый элемент в коллекцию.
@@ -21,6 +22,7 @@ public class AddCommand implements Command {
      */
     @Override
     public void execute(InputHandler reader) {
-        arrayDequeDAO.add(manager.formed(reader));
+        HumanBeing existedHuman = manager.formed(reader);
+        arrayDequeDAO.add(existedHuman);
     }
 }
