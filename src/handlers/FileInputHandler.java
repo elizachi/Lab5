@@ -8,7 +8,7 @@ public class FileInputHandler extends InputHandler {
      * Переопределённый метод для считывания с файла
      */
     @Override
-    public String read(boolean is) {
+    public String read() {
         try {
             int length = string.length();
             string.delete(0, length);

@@ -1,15 +1,21 @@
 package others;
 
-import handlers.ConsoleInputHandler;
+import service.AskInput;
 import service.CommandManager;
 
 public class DataBaseRunner {
 
+    /**
+     * Главный класс
+     * @param args
+     */
     public static void main(String [] args) {
-        // начинаем со считывания с консоли
-        CommandManager manager = new CommandManager(new ConsoleInputHandler());
+        // определяем нужен ли нам дружественный интерфейс
+        AskInput.turnOnFriendly();
+        // считывать начинаем с консоли
+        CommandManager.turnOnConsole();
         // запускаем менеджер-определитель команды
-        manager.start(true);
+        CommandManager.start();
     }
 
 }

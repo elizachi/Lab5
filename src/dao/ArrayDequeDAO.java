@@ -7,19 +7,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public final class ArrayDequeDAO implements DAO {
-    /**
-     * ЗДЕСЬ ВСЕ БУДЕТ ПРОСТО ВЫПОЛНЯТЬСЯ БЕЗ ПРОВЕРОК ИЛИ ОБРАБОТКИ КАК ЭТО ЕСТЬ У ЕГОШИНА
-     */
     private static int availableId = 1;
     private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
     private Generator generator = new Generator();
-
-    public void read() {
-        System.out.print("Select...");
-    }
-    public void delete() {
-        System.out.print("Delete...");
-    }
 
     /**
      * Добавление нового элемента у коллекцию
@@ -31,6 +21,7 @@ public final class ArrayDequeDAO implements DAO {
         humanCollection.add(newHuman);
         generator.generateID(newHuman);
         generator.generateCreationDate(newHuman);
+        System.out.print("Ура Ура! Элемент добавлен в коллекцию!\n");
         return availableId++;
     }
 
@@ -53,6 +44,7 @@ public final class ArrayDequeDAO implements DAO {
             existedHuman.setMood(updatedHuman.getMood());
             existedHuman.setCar(updatedHuman.getCar());
         }
+        System.out.print("Ура ура! Элемент обновлён!\n");
     }
 
     /**

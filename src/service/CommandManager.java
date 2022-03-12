@@ -2,49 +2,63 @@ package service;
 
 import commands.*;
 import dao.*;
+import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 
 /**
- * Класс обработчик, определяющий команду и ее поведение по отношению к входным данным.
+ * Класс обработчик, определяющий команду и ее поведение по отношению к входным данным
  */
 public class CommandManager {
     private static final DAO database = new ArrayDequeDAO();
-    private InputHandler reader;
+    private static InputHandler reader;
 
-    private final Command[] commands = {
+    private static final Command[] commands = {
             new AddCommand(database),
             new UpdateCommand(database),
+            new ScriptCommand(),
             new ReadCommand(database),
             new DeleteCommand(database)
     };
 
-    public CommandManager(InputHandler reader) {
-        this.reader = reader;
+    /**
+     * Меняет тип считывания на считывание с консоли
+     */
+    public static void turnOnConsole() {
+        reader = new ConsoleInputHandler();
     }
 
     /**
-     * Если нам надо поменять тип считывания, то мы делаем это здесь
-     * @param reader
+     * Меняет тип считывания на считывание с файла
+     * Отключает дружетвенный интерфейс, если он включён
      */
-    public void setReader(InputHandler reader) {
-        this.reader = reader;
+    public static void turnOnFile() {
+        reader = new ConsoleInputHandler();
+        AskInput.turnOffFriendly();
     }
 
-    public void start(boolean is) {
-        System.out.print("Пожалуйста, введите команду.\n");
-        whichCommand(reader.read(is));
+    /**
+     * Начало работы определителя команд
+     */
+    public static void start() {
+        whichCommand(AskInput.askCommand(reader));
     }
-    private void whichCommand(String command) {
-        try {
-            int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
-            commands[commandIndex].execute(reader);
-        } catch(IllegalArgumentException e) {
-            System.err.print("Команада введена неверно. Пожалуйста, повторите попытку.\n");
-            start(false);
-        }
+
+    /**
+     * По полученной строке определяет команду и совершает её вызов
+     * @param command - уже прошедшая проверку строка, содержащая команду
+     */
+    private static void whichCommand(String command) {
+        int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
+        commands[commandIndex].execute(reader);
+        start();
     }
 }
+
+/**
+ * Перечисление существующих команд
+ */
 enum CommandType {
     ADD,
-    UPDATE;
+    UPDATE,
+    EXECUTE_SCRIPT;
 }

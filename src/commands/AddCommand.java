@@ -2,14 +2,15 @@ package commands;
 
 import dao.DAO;
 import handlers.InputHandler;
+import service.FormedManager;
 import source.HumanBeing;
 
-
 /**
- * ЗДЕСЬ БУДЕТ ПОЛНАЯ ОБРАБОТКА ВХОДНЫХ ДАННЫХ С ФОРМИРОВАНИЕМ ЭЛЕМЕНТОВ
+ * Класс команды add. Добавляет новый элемент в коллекцию.
  */
 public class AddCommand implements Command {
     private final DAO arrayDequeDAO;
+    private final FormedManager manager = new FormedManager();
 
     public AddCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
@@ -17,10 +18,11 @@ public class AddCommand implements Command {
 
     /**
      * Обработка поступивших паратемтров и добавление их в коллекцию
-     * @param arguments - все аргументы, нужные для формирования аргумента, в виде строки
+     * @param reader - экземпляр класса InputHandler который определяет тип считывания
      */
     @Override
     public void execute(InputHandler reader) {
-        // formed(arguments);
+        HumanBeing existedHuman = manager.formed(reader);
+        arrayDequeDAO.add(existedHuman);
     }
 }

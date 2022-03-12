@@ -1,8 +1,15 @@
 package service;
 
+import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 import source.Car;
+import source.Coordinates;
 import source.Mood;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 
 /**
  * Класс, позволяющий переключать дружелюбный интерфейс для быстрой отладки
@@ -10,32 +17,24 @@ import source.Mood;
  */
 public class AskInput {
     private static boolean friendlyInterface;
-    private InputHandler inputHandler;
     private Boolean booleanInput;
-
-    public AskInput(InputHandler inputHandler) {
-        this.inputHandler = inputHandler;
-    }
-
-    public void setInputHandler(InputHandler inputHandler){
-        this.inputHandler = inputHandler;
-    }
 
     /**
      * Метод, позволяющй включить дружелюбный интерфейс
      * @throws RuntimeException
      */
-    public void turnOnFriendly() throws RuntimeException {
+    public static void turnOnFriendly() throws RuntimeException {
+        InputHandler inputHandler = new ConsoleInputHandler();
         System.out.println("Включить дружелюбный интерфейс?");
-        String input = inputHandler.read(true);
-        input = input.toLowerCase();
+        String input = inputHandler.read().toLowerCase();
         try {
             if (input.equals("true") || input.equals("yes") || input.equals("да")) {
                 friendlyInterface = true;
             } else if (input.equals("false") || input.equals("no") || input.equals("нет")) {
                 friendlyInterface = false;
             } else {
-                throw new RuntimeException("Вы что-то не то ввели, пожалуйста, повторите попытку.");
+                throw new RuntimeException("Вы что-то не то ввели, пожалуйста, повторите попытку.\n" +
+                        "Вы можете ввести следующее: \"да\" \"yes\" \"true\" \"нет\" \"no\" \"false\"\n\n");
             }
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
@@ -46,13 +45,37 @@ public class AskInput {
     /**
      * Метод, позволяющий выключить дружелюбный интерфейс
      */
-    public void turnOffFriendly(){
+    public static void turnOffFriendly(){
         friendlyInterface = false;
     }
 
-    public String askName() {
+    public static String askCommand(InputHandler in) {
+        String command = null;
+        while(command == null) {
+            printMessage("Введите команду:\n");
+            command = in.read();
+            try {
+                CommandType.valueOf(command.toUpperCase()).ordinal();
+            } catch(IllegalArgumentException e) {
+                System.err.print("Команада введена неверно. Повторите попытку.\n");
+                command = null;
+            }
+        }
+        return command;
+    }
+
+    public static int askId(InputHandler in) {
+        printMessage("Введите id: ");
+        return Integer.parseInt(in.read());
+    }
+    /**
+     * Метод, запрашивающий ввод поля "name"
+     * @param in
+     * @return
+     */
+    public String askName(InputHandler in) {
         printMessage("Введите имя: ");
-        return inputHandler.read(true);
+        return in.read();
     }
 
     /**
@@ -60,27 +83,27 @@ public class AskInput {
      * @return возвращает введенную строку
      * @throws RuntimeException если неверно введены координаты
      */
-    public String askCoordinates() throws RuntimeException {
+    public Coordinates askCoordinates(InputHandler in) throws RuntimeException {
         printMessage("Введите координаты: ");
-        String input = inputHandler.read(true);
+        String input_x = in.read();
+        String input_y = in.read();
+        int x = 0;
+        float y = 0;
         try {
-            if (!(input.contains(" "))) {
-                throw new RuntimeException("Пожалуйста, введите координаты через пробел.");
-            }
-            int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
-            Float y = Float.parseFloat(input);
+            x = Integer.parseInt(input_x);
+            y = Float.parseFloat(input_y);
         } catch (RuntimeException e) {
             if (friendlyInterface) {
                 System.out.println(e.getMessage());
-                askCoordinates();
+                askCoordinates(in);
             }
         }
-        return input;
+        return new Coordinates(x, y);
     }
 
-    public Boolean askRealHero() throws RuntimeException {
+    public Boolean askRealHero(InputHandler in) throws RuntimeException {
         printMessage("Является ли этот человек настоящим героем?");
-        String input = inputHandler.read(true);
+        String input = in.read();
         input = input.toLowerCase();
         try {
             if (input.contains("true") || input.contains("yes") || input.contains("да")) {
@@ -93,62 +116,68 @@ public class AskInput {
         } catch (RuntimeException e){
             if (friendlyInterface){
                 System.out.println(e.getMessage());
-                askRealHero();
+                askRealHero(in);
             }
         }
         return booleanInput;
     }
 
     @SuppressWarnings("DuplicatedCode")
-    public Boolean askHasToothpick() throws RuntimeException {
+    public Boolean askHasToothpick(InputHandler in) throws RuntimeException {
         printMessage("Есть ли у человека зубная щётка?");
-        String input = inputHandler.read(true);
+        String input = in.read();
         try {
             booleanInput = getBooleanInput(input);
         } catch (RuntimeException e){
             if (friendlyInterface){
                 System.out.println(e.getMessage());
-                askRealHero();
+                askRealHero(in);
             }
         }
         return booleanInput;
     }
 
-    public int askImpactSpeed() {
+    public int askImpactSpeed(InputHandler in) {
         printMessage("Введите скорость:");
-        String input = inputHandler.read(true);
+        String input = in.read();
         return Integer.parseInt(input);
     }
 
-    public String askSoundtrackName() throws RuntimeException {
+    public String askSoundtrackName(InputHandler in) throws RuntimeException {
         printMessage("Введите название саундтрека:");
-        return inputHandler.read(true);
+        return in.read();
     }
 
-    public Long askMinutesOfWaiting(){
+    public Long askMinutesOfWaiting(InputHandler in){
         printMessage("Введите минуты ожидания:");
-        String input = inputHandler.read(true);
+        String input = in.read();
         return Long.getLong(input);
     }
 
-    public Mood askMood(){
+    public Mood askMood(InputHandler in){
         printMessage("Введите состояние персонажа:");
-        String string = inputHandler.read(true).toUpperCase();
+        String string = in.read().toUpperCase();
         return Mood.valueOf(string);
     }
 
-    public Car askCar(){
+    public Car askCar(InputHandler in){
         printMessage("Введите, какая машина будет у данного персонажа:");
-        String input = inputHandler.read(true);
-        Car car = new Car(false);
-        if (input.contains(" ")) {
-            String name = input.substring(0, input.indexOf(" "));
-            car.setCarName(name);
-        } else {
-            Boolean cool = getBooleanInput(input);
-            car.setCarCool(cool);
+        String input_name = in.read();
+        String input_cool = in.read();
+        return new Car(input_name, Boolean.parseBoolean(input_cool));
+    }
+
+    public String askFileName(InputHandler in) {
+        String fileName = in.read();
+        File file = new File(fileName);
+        try {
+            if(!file.exists()) throw new FileNotFoundException("Файл не найден.\n");
+            if(file.length() == 0) throw new NoSuchElementException("Файл пуст.\n");
+            if(!file.canRead()) throw new IOException("Нет прав на чтение.\n");
+        } catch(NoSuchElementException | IOException e) {
+            System.err.print(e.getMessage());
         }
-        return car;
+        return fileName;
     }
 
     /**
@@ -168,7 +197,7 @@ public class AskInput {
      * Внутренний метод для вывода сообщения относительно friendlyInterface
      * @param message строка, которая будет напечатана, если дружественный интерфейс включен
      */
-    private void printMessage(String message){
+    private static void printMessage(String message){
         if (friendlyInterface) {
             System.out.println(message);
         }
