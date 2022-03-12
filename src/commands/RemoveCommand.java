@@ -2,17 +2,18 @@ package commands;
 
 import dao.DAO;
 import handlers.InputHandler;
+import service.AskInput;
 
-public class DeleteCommand implements Command {
+public class RemoveCommand implements Command {
     private final DAO arrayDequeDAO;
 
-    public DeleteCommand(DAO arrayDequeDAO) {
+    public RemoveCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
     }
 
     @Override
     public void execute(InputHandler reader) {
-        // если элемент есть то все ок
-        //arrayDequeDAO.delete();
+        int id = AskInput.askId(reader);
+        arrayDequeDAO.remove(id);
     }
 }

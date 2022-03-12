@@ -47,6 +47,15 @@ public final class ArrayDequeDAO implements DAO {
         System.out.print("Ура ура! Элемент обновлён!\n");
     }
 
+    @Override
+    public void remove(int id) {
+        HumanBeing existedHuman = get(id);
+        if(existedHuman != null) {
+            humanCollection.remove(existedHuman);
+        }
+        System.out.print("Эхб элемент удалили...\n");
+    }
+
     /**
      * Нахождение элемента по id
      * @param id - айдишник нужного элемента
