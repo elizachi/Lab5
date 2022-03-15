@@ -1,35 +1,41 @@
 package handlers;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class FileInputHandler extends InputHandler {
-    StringBuilder string = new StringBuilder();
+    private final Scanner scanner = new Scanner(System.in);
+    StringBuilder builder = new StringBuilder();
     /**
-     * Переопределённый метод для считывания с файла
+     * Переопределённый метод для считывания с файла, проверяющий ошибки
+     * @return строки указанного файла
      */
     @Override
     public String read() {
+
+        builder.delete(0, builder.capacity());
+        String input = removeSpaces(scanner.nextLine());
+        if(input.isEmpty()) {
+            throw new RuntimeException("Необходимо указать путь к файлу.");
+        }
+        File file = new File(input);
+
         try {
-            int length = string.length();
-            string.delete(0, length);
-            String link = this.toString();
-            File file = new File(link);
-            FileReader fileReader = new FileReader(file);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(fileReader);
-            // считаем сначала первую строку
-            String line = reader.readLine();
-            string.append(line);
-            while (line != null) {
-                // считываем остальные строки в цикле
-                line = reader.readLine();
-                string.append(line);
+            FileInputStream fileInput = new FileInputStream(file);
+            BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
+
+            int i;
+            while ((i = bufferedInput.read()) != -1) {
+                builder.append((char) i);
             }
+
+            bufferedInput.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден, пожалуйста, проверьте указанный путь.");
-        } catch (IOException e) {
+            System.out.println("Нужного файла не обнаружено.");
+        } catch (IOException e){
             System.out.println("Возникла техническая шоколадка. Пожалуйста, повторите попытку.");
         }
-        return string.toString();
+
+        return builder.toString();
     }
 }

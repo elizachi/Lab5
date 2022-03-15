@@ -10,8 +10,8 @@ public abstract class InputHandler {
 
     /**
      *Убирает лишние пробелы из полученной строки для дальнейшей обработки
-     * @param input  - только что введённая строка
-     * @return       - строка без лишних пробелов
+     * @param input   только что введённая строка
+     * @return        строка без лишних пробелов
      */
     // TODO заменить конструкцию на регулярные выржанеия
     public String removeSpaces(String input) {
