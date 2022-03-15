@@ -10,12 +10,8 @@ public class ConsoleInputHandler extends InputHandler {
      */
     @Override
     public String read() {
-        // ВНИМАНИЕ!!!! Считывает не строку целиком, а просто следующее слово!!!
-        // механизм пропускает остальную информацию введенною в строку, если подано false и переходит на след. строку
-        String input = removeSpaces(scanner.nextLine().split(" ")[0]);
-        if(input.isEmpty()) {
-            throw new RuntimeException("Пустой ввод!");
-        }
+        // ВНИМАНИЕ!!!! Считывает только первое слово введённой строки. Остальные данные игнорируются.
+        String input = scanner.nextLine().trim().split(" ")[0];
         return input;
     }
 }
