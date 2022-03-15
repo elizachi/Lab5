@@ -21,7 +21,6 @@ public final class ArrayDequeDAO implements DAO {
         humanCollection.add(newHuman);
         generator.generateID(newHuman);
         generator.generateCreationDate(newHuman);
-        System.out.print("Ура Ура! Элемент добавлен в коллекцию!\n");
         return availableId++;
     }
 
@@ -44,7 +43,6 @@ public final class ArrayDequeDAO implements DAO {
             existedHuman.setMood(updatedHuman.getMood());
             existedHuman.setCar(updatedHuman.getCar());
         }
-        System.out.print("Ура ура! Элемент обновлён!\n");
     }
 
     @Override
@@ -53,7 +51,6 @@ public final class ArrayDequeDAO implements DAO {
         if(existedHuman != null) {
             humanCollection.remove(existedHuman);
         }
-        System.out.print("Эхб элемент удалили...\n");
     }
 
     /**

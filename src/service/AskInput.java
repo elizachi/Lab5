@@ -17,7 +17,6 @@ import java.util.NoSuchElementException;
  */
 public class AskInput {
     private static boolean friendlyInterface;
-    private Boolean booleanInput;
 
     /**
      * Метод, позволяющй включить дружественный интерфейс
@@ -25,19 +24,15 @@ public class AskInput {
      */
     public static void turnOnFriendly() throws RuntimeException {
         InputHandler inputHandler = new ConsoleInputHandler();
-        System.out.println("Включить дружелюбный интерфейс?");
+        System.out.println("Включить дружественный интерфейс?");
         String input = inputHandler.read().toLowerCase();
         try {
-            if (input.equals("true") || input.equals("yes") || input.equals("да")) {
-                friendlyInterface = true;
-            } else if (input.equals("false") || input.equals("no") || input.equals("нет")) {
-                friendlyInterface = false;
-            } else {
-                throw new RuntimeException("Вы что-то не то ввели, пожалуйста, повторите попытку.\n" +
-                        "Вы можете ввести следующее: \"да\" \"yes\" \"true\" \"нет\" \"no\" \"false\"\n\n");
-            }
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+            friendlyInterface = getBooleanInput(input);
+        } catch(NumberFormatException e) {
+            System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+            turnOnFriendly();
+        } catch (IllegalArgumentException e) {
+            System.err.print("Программа не понимает вашего ответа. Повторите попытку.\n");
             turnOnFriendly();
         }
     }

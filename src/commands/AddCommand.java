@@ -24,5 +24,6 @@ public class AddCommand implements Command {
     public void execute(InputHandler reader) {
         HumanBeing existedHuman = manager.formed(reader);
         arrayDequeDAO.add(existedHuman);
+        System.out.print("add: Ура Ура! Элемент добавлен в коллекцию!\n");
     }
 }

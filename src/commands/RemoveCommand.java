@@ -14,6 +14,11 @@ public class RemoveCommand implements Command {
     @Override
     public void execute(InputHandler reader) {
         int id = AskInput.askId(reader);
-        arrayDequeDAO.remove(id);
+        if(arrayDequeDAO.get(id) != null) {
+            arrayDequeDAO.remove(id);
+            System.out.print("remove_by_id: Эхб, элемент удалили....\n");
+        } else {
+            System.err.print("remove_by_id: Элемента с таким id не нашлось.\n");
+        }
     }
 }

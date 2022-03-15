@@ -17,7 +17,12 @@ public class UpdateCommand implements Command {
     @Override
     public void execute(InputHandler reader) {
         int id = AskInput.askId(reader);
-        HumanBeing existedHuman = manager.formed(reader);
-        arrayDequeDAO.update(id, existedHuman);
+        if(arrayDequeDAO.get(id) != null) {
+            HumanBeing existedHuman = manager.formed(reader);
+            arrayDequeDAO.update(id, existedHuman);
+            System.out.print("update: Ура ура! Элемент обновлён!\n");
+        } else {
+            System.err.print("update: Элемента с таким id не нашлось.\n");
+        }
     }
 }
