@@ -10,7 +10,7 @@ public class HumanBeing implements Comparable {
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно
     // генерироваться автоматически
     private boolean realHero;
-    private boolean hasToothpick; //Поле может быть null
+    private Boolean hasToothpick; //Поле может быть null
     private int impactSpeed;
     private String soundtrackName; //Поле не может быть null
     private Long minutesOfWaiting; //Поле не может быть null
@@ -19,7 +19,7 @@ public class HumanBeing implements Comparable {
 
 
     public HumanBeing(String name, String soundtrackName, Long minutesOfWaiting, int impactSpeed,
-                      boolean realHero, boolean hasToothpick, Coordinates coordinates, Mood mood, Car car) {
+                      boolean realHero, Boolean hasToothpick, Coordinates coordinates, Mood mood, Car car) {
         this.name = name;
         this.soundtrackName = soundtrackName;
         this.minutesOfWaiting = minutesOfWaiting;
