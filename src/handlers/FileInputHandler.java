@@ -13,7 +13,7 @@ public class FileInputHandler extends InputHandler {
     @Override
     public String read() {
 
-        builder.delete(0, builder.capacity());
+        builder.delete(0, builder.length());
         String input = removeSpaces(scanner.nextLine());
         if(input.isEmpty()) {
             throw new RuntimeException("Необходимо указать путь к файлу.");
