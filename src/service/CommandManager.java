@@ -3,7 +3,10 @@ package service;
 import commands.*;
 import dao.*;
 import handlers.ConsoleInputHandler;
+import handlers.FileInputHandler;
 import handlers.InputHandler;
+
+import java.io.BufferedInputStream;
 
 /**
  * Класс обработчик, определяющий команду и ее поведение по отношению к входным данным
@@ -31,8 +34,8 @@ public class CommandManager {
      * Меняет тип считывания на считывание с файла
      * Отключает дружетвенный интерфейс, если он включён
      */
-    public static void turnOnFile() {
-        reader = new ConsoleInputHandler();
+    public static void turnOnFile(BufferedInputStream bufferedInput) {
+        reader = new FileInputHandler(bufferedInput);
         AskInput.turnOffFriendly();
     }
 

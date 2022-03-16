@@ -9,7 +9,7 @@ public class ConsoleInputHandler extends InputHandler {
      * @return считанная строка без лишних пробелов
      */
     @Override
-    public String read() {
+    public String readInput() {
         // ВНИМАНИЕ!!!! Считывает только первое слово введённой строки. Остальные данные игнорируются.
         String input = scanner.nextLine().trim().split(" ")[0];
         return input;

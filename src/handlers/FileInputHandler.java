@@ -1,41 +1,33 @@
 package handlers;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class FileInputHandler extends InputHandler {
-    private final Scanner scanner = new Scanner(System.in);
-    StringBuilder builder = new StringBuilder();
+    private final BufferedInputStream bufferedInput;
+    private String word = "";
+
+    public FileInputHandler(BufferedInputStream bufferedInput) {
+        this.bufferedInput = bufferedInput;
+    }
+
     /**
-     * Переопределённый метод для считывания с файла, проверяющий ошибки
-     * @return строки указанного файла
+     * Переопределённый метод для считывания с файла
+     * @return одно слово указанного файла
      */
     @Override
-    public String read() {
-
-        builder.delete(0, builder.length());
-        String input = removeSpaces(scanner.nextLine());
-        if(input.isEmpty()) {
-            throw new RuntimeException("Необходимо указать путь к файлу.");
-        }
-        File file = new File(input);
-
+    public String readInput() {
+        int i;
         try {
-            FileInputStream fileInput = new FileInputStream(file);
-            BufferedInputStream bufferedInput = new BufferedInputStream(fileInput);
-
-            int i;
-            while ((i = bufferedInput.read()) != -1) {
-                builder.append((char) i);
+            i = bufferedInput.read();
+            while(i != -1) {
+                if(i == ' ' || i == '\n') break;
+                word += (char)i;
+                i = bufferedInput.read();
             }
-
-            bufferedInput.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Нужного файла не обнаружено.");
-        } catch (IOException e){
-            System.out.println("Возникла техническая шоколадка. Пожалуйста, повторите попытку.");
+        } catch (IOException e) {
+            System.err.print("Произошла ошибка.\n");
+            return null;
         }
-
-        return builder.toString();
+        return word;
     }
 }

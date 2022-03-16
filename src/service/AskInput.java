@@ -6,10 +6,8 @@ import source.Car;
 import source.Coordinates;
 import source.Mood;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.NoSuchElementException;
 
 /**
  * Класс, позволяющий переключать дружественный интерфейс для быстрой тестировки
@@ -25,7 +23,7 @@ public class AskInput {
     public static void turnOnFriendly() throws RuntimeException {
         InputHandler inputHandler = new ConsoleInputHandler();
         System.out.println("Включить дружественный интерфейс?");
-        String input = inputHandler.read().toLowerCase();
+        String input = inputHandler.readInput().toLowerCase();
         try {
             friendlyInterface = getBooleanInput(input);
         } catch(NumberFormatException e) {
@@ -40,7 +38,7 @@ public class AskInput {
     /**
      * Метод, позволяющий выключить дружественный интерфейс
      */
-    public static void turnOffFriendly(){
+    public static void turnOffFriendly() {
         friendlyInterface = false;
     }
 
@@ -54,7 +52,7 @@ public class AskInput {
         while(command == null) {
             printMessage("Введите команду:");
             try {
-                command = in.read();
+                command = in.readInput();
                 CommandType.valueOf(command.toUpperCase()).ordinal();
             } catch(IllegalArgumentException e) {
                 if(!command.isEmpty()) System.err.print("Команада введена неверно. Повторите попытку.\n");
@@ -75,7 +73,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите id: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 if(Integer.parseInt(input) <= 0) throw new NumberFormatException();
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) System.err.print("Id введен неверно. Повторите попытку.\n");
@@ -91,7 +89,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите имя: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 if(input.isEmpty()) throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
                 System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
@@ -106,7 +104,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите название саундтрека:");
             try {
-                input = in.read();
+                input = in.readInput();
                 if(input.isEmpty()) throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
                 System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
@@ -121,7 +119,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите минуты ожидания: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 Long.parseLong(input);
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) System.err.print("Поле minutesOfWaiting введено неверно. Повторите попытку.\n");
@@ -137,7 +135,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите скорость: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 Integer.parseInt(input);
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) System.err.print("Поле impactSpeed введено неверно. Повторите попытку.\n");
@@ -153,7 +151,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Был героем?");
             try {
-                input = in.read();
+                input = in.readInput();
                 getBooleanInput(input);
             } catch(NumberFormatException e) {
                 System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
@@ -171,7 +169,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Пользовался зубочисткой?");
             try {
-                input = in.read();
+                input = in.readInput();
                 getBooleanInput(input);
             } catch(NumberFormatException e) {
                 System.out.print("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m\n");
@@ -190,7 +188,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите координату x: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 Integer.parseInt(input);
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) System.err.print("Координата x введена неверно. Повторите попытку.\n");
@@ -203,7 +201,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите координату y: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 if(Float.parseFloat(input) < -188) throw new NumberFormatException();
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) System.err.print("Координата y введена неверно. Повторите попытку.\n");
@@ -220,7 +218,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите состояние персонажа: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 if(input.isEmpty()) throw new NumberFormatException();
                 Mood.valueOf(input.toUpperCase());
             } catch(NumberFormatException e) {
@@ -241,7 +239,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Введите её название: ");
             try {
-                input = in.read();
+                input = in.readInput();
                 name = input;
                 if(input.isEmpty()) throw new IllegalArgumentException();
             } catch(IllegalArgumentException e) {
@@ -253,7 +251,7 @@ public class AskInput {
         while(input == null) {
             printMessage("Машина была крутой? ");
             try {
-                input = in.read();
+                input = in.readInput();
                 getBooleanInput(input);
             } catch(NumberFormatException e) {
                 System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
@@ -267,17 +265,19 @@ public class AskInput {
         return new Car(name, cool);
     }
 
-    public String askFileName(InputHandler in) {
-        String fileName = in.read();
-        File file = new File(fileName);
-        try {
-            if(!file.exists()) throw new FileNotFoundException("Файл не найден.\n");
-            if(file.length() == 0) throw new NoSuchElementException("Файл пуст.\n");
-            if(!file.canRead()) throw new IOException("Нет прав на чтение.\n");
-        } catch(NoSuchElementException | IOException e) {
-            System.err.print(e.getMessage());
+    public FileInputStream askFileName(InputHandler in) {
+        FileInputStream fileInput = null;
+        while(fileInput == null) {
+            printMessage("Введите путь до файла, который хотите прочесть.\n");
+            String fileName = in.readInput();
+            try {
+                fileInput = new FileInputStream(fileName);
+            } catch (FileNotFoundException e) {
+                printMessage("Файл не найден. Проверьте корректность указанного пути.\n");
+                fileInput = null;
+            }
         }
-        return fileName;
+        return fileInput;
     }
 
     /**
