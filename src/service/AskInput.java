@@ -1,6 +1,7 @@
 package service;
 
 import handlers.ConsoleInputHandler;
+import handlers.FileInputHandler;
 import handlers.InputHandler;
 import source.Car;
 import source.Coordinates;
@@ -18,9 +19,8 @@ public class AskInput {
 
     /**
      * Метод, позволяющй включить дружественный интерфейс
-     * @throws RuntimeException
      */
-    public static void turnOnFriendly() throws RuntimeException {
+    public static void turnOnFriendly() {
         InputHandler inputHandler = new ConsoleInputHandler();
         System.out.println("Включить дружественный интерфейс?");
         String input = inputHandler.readInput().toLowerCase();
@@ -55,9 +55,19 @@ public class AskInput {
                 command = in.readInput();
                 CommandType.valueOf(command.toUpperCase()).ordinal();
             } catch(IllegalArgumentException e) {
-                if(!command.isEmpty()) System.err.print("Команада введена неверно. Повторите попытку.\n");
-                else System.err.print("Вы ввели пустую строку. Повторите попытку\n");
-                command = null;
+                if(friendlyInterface) {
+                    if(!command.isEmpty()) {
+                        System.err.print("Команада введена неверно. Повторите попытку.\n");
+                    }
+                    else {
+                        System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                    }
+                    command = null;
+                } else {
+                    System.err.print("Команда введена неверно. Строка " + FileInputHandler.getNumberOfString() +
+                            " будет проигнорирована.\n");
+                    return null;
+                }
             }
         }
         return command;
@@ -76,8 +86,12 @@ public class AskInput {
                 input = in.readInput();
                 if(Integer.parseInt(input) <= 0) throw new NumberFormatException();
             } catch(NumberFormatException e) {
-                if(!input.isEmpty()) System.err.print("Id введен неверно. Повторите попытку.\n");
-                else System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                if(!input.isEmpty()) {
+                    System.err.print("Id введен неверно. Повторите попытку.\n");
+                }
+                else {
+                    System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                }
                 input = null;
             }
         }
@@ -122,8 +136,12 @@ public class AskInput {
                 input = in.readInput();
                 Long.parseLong(input);
             } catch(NumberFormatException e) {
-                if(!input.isEmpty()) System.err.print("Поле minutesOfWaiting введено неверно. Повторите попытку.\n");
-                else System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                if(!input.isEmpty()) {
+                    System.err.print("Поле minutesOfWaiting введено неверно. Повторите попытку.\n");
+                }
+                else {
+                    System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                }
                 input = null;
             }
         }
@@ -138,8 +156,12 @@ public class AskInput {
                 input = in.readInput();
                 Integer.parseInt(input);
             } catch(NumberFormatException e) {
-                if(!input.isEmpty()) System.err.print("Поле impactSpeed введено неверно. Повторите попытку.\n");
-                else System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                if(!input.isEmpty()) {
+                    System.err.print("Поле impactSpeed введено неверно. Повторите попытку.\n");
+                }
+                else {
+                    System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                }
                 input = null;
             }
         }
@@ -172,7 +194,7 @@ public class AskInput {
                 input = in.readInput();
                 getBooleanInput(input);
             } catch(NumberFormatException e) {
-                System.out.print("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m\n");
+                printMessage("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m");
                 return null;
             } catch (IllegalArgumentException e) {
                 System.err.print("Поле realHero введено неверно. Повторите попытку.\n");
@@ -222,7 +244,7 @@ public class AskInput {
                 if(input.isEmpty()) throw new NumberFormatException();
                 Mood.valueOf(input.toUpperCase());
             } catch(NumberFormatException e) {
-                System.out.print("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m\n");
+                printMessage("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m");
                 return null;
             } catch (IllegalArgumentException e) {
                 System.err.print("Поле mood введено неверно. Повторите попытку.\n");
@@ -243,7 +265,7 @@ public class AskInput {
                 name = input;
                 if(input.isEmpty()) throw new IllegalArgumentException();
             } catch(IllegalArgumentException e) {
-                System.out.print("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m\n");
+                printMessage("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m");
                 name = null;
             }
         }
@@ -268,12 +290,12 @@ public class AskInput {
     public FileInputStream askFileName(InputHandler in) {
         FileInputStream fileInput = null;
         while(fileInput == null) {
-            printMessage("Введите путь до файла, который хотите прочесть.\n");
+            printMessage("Введите путь до файла, который хотите прочесть.");
             String fileName = in.readInput();
             try {
                 fileInput = new FileInputStream(fileName);
             } catch (FileNotFoundException e) {
-                printMessage("Файл не найден. Проверьте корректность указанного пути.\n");
+                printMessage("Файл не найден. Проверьте корректность указанного пути и повторите попытку.\n");
                 fileInput = null;
             }
         }

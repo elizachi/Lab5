@@ -1,13 +1,18 @@
 package handlers;
 
+import service.CommandManager;
+
 import java.io.*;
 
 public class FileInputHandler extends InputHandler {
     private final BufferedInputStream bufferedInput;
-    private String word = "";
+    private static long numberOfString = 0;
 
     public FileInputHandler(BufferedInputStream bufferedInput) {
         this.bufferedInput = bufferedInput;
+    }
+    public static long getNumberOfString() {
+        return numberOfString;
     }
 
     /**
@@ -16,18 +21,21 @@ public class FileInputHandler extends InputHandler {
      */
     @Override
     public String readInput() {
+        String word = "";
         int i;
         try {
-            i = bufferedInput.read();
-            while(i != -1) {
-                if(i == ' ' || i == '\n') break;
-                word += (char)i;
-                i = bufferedInput.read();
+            while((i = bufferedInput.read()) != -1) {
+                if(i != ' ' && i != '\n' && i != '\r') {
+                    word += (char)i;
+                } else if(i == '\n') break;
+            } if(i == -1) {
+                CommandManager.turnOnConsole();
             }
         } catch (IOException e) {
             System.err.print("Произошла ошибка.\n");
-            return null;
+            word = null;
         }
+        numberOfString++;
         return word;
     }
 }

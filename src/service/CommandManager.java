@@ -2,9 +2,7 @@ package service;
 
 import commands.*;
 import dao.*;
-import handlers.ConsoleInputHandler;
-import handlers.FileInputHandler;
-import handlers.InputHandler;
+import handlers.*;
 
 import java.io.BufferedInputStream;
 
@@ -43,7 +41,10 @@ public class CommandManager {
      * Начало работы определителя команд
      */
     public static void start() {
-        whichCommand(AskInput.askCommand(reader));
+        String command = AskInput.askCommand(reader);
+        if(command != null) {
+            whichCommand(command);
+        }
     }
 
     /**
