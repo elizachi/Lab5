@@ -7,22 +7,23 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Класс команды head
- * Выводит первый элемент коллекции
+ * Класс команды clear
+ * Очищает коллекцию
  */
-public class HeadCommand implements Command{
+public class ClearCommand implements Command{
     private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
 
-    HeadCommand(Deque<HumanBeing> humanCollection){
+    public ClearCommand(Deque<HumanBeing> humanCollection){
         this.humanCollection = humanCollection;
     }
 
     @Override
     public void execute(InputHandler reader) {
         if (!(humanCollection.isEmpty())){
-            System.out.print("head: Первый элемент коллекции - " + humanCollection.getFirst() + "\n");
+            humanCollection.clear();
+            System.out.print("clear: Коллекция очищена!\n");
         } else {
-            System.err.print("head: Sorry, коллекция пуста.\n");
+            System.err.print("clear: Коллекция и так пуста.\n");
         }
     }
 }

@@ -20,7 +20,7 @@ public class RemoveHeadCommand implements Command{
     @Override
     public void execute(InputHandler reader) {
         if (!(humanCollection.isEmpty())){
-            System.out.print("remove_head: Первый элемент коллекции - " + humanCollection.removeFirst());
+            System.out.print("remove_head: Первый элемент коллекции - " + humanCollection.removeFirst() + "\n");
         } else {
             System.err.print("remove_head: Sorry, коллекция пуста.\n");
         }
