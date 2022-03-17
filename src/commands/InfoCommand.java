@@ -13,12 +13,12 @@ import java.util.Deque;
 public class InfoCommand implements Command {
     private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
 
-    InfoCommand(Deque<HumanBeing> humanCollection){
+    public InfoCommand(Deque<HumanBeing> humanCollection){
         this.humanCollection = humanCollection;
     }
 
     @Override
     public void execute(InputHandler reader) {
-        System.out.print("info: Коллекция ArrayDeque, создана:" + "..." + "\n" + "Количество элементов: " + humanCollection.size() + "\n");
+        System.out.print("info: Коллекция ArrayDeque, создана: " + "..." + "\n" + "Количество элементов: " + humanCollection.size() + "\n");
     }
 }

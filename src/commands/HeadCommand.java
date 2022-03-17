@@ -13,7 +13,7 @@ import java.util.Deque;
 public class HeadCommand implements Command{
     private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
 
-    HeadCommand(Deque<HumanBeing> humanCollection){
+    public HeadCommand(Deque<HumanBeing> humanCollection){
         this.humanCollection = humanCollection;
     }
 

@@ -5,13 +5,17 @@ import dao.*;
 import handlers.ConsoleInputHandler;
 import handlers.FileInputHandler;
 import handlers.InputHandler;
+import source.HumanBeing;
 
 import java.io.BufferedInputStream;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Класс обработчик, определяющий команду и ее поведение по отношению к входным данным
  */
 public class CommandManager {
+    private static final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
     private static final DAO database = new ArrayDequeDAO();
     private static InputHandler reader;
 
@@ -20,7 +24,11 @@ public class CommandManager {
             new UpdateCommand(database),
             // new ReadCommand(database),
             new RemoveCommand(database),
-            new ScriptCommand()
+            new ScriptCommand(),
+            new HelpCommand(),
+            new ShowCommand(humanCollection, database),
+            new ClearCommand(humanCollection),
+            new InfoCommand(humanCollection)
     };
 
     /**
@@ -48,7 +56,7 @@ public class CommandManager {
 
     /**
      * По полученной строке определяет команду и совершает её вызов
-     * @param command - уже прошедшая проверку строка, содержащая команду
+     * @param command уже прошедшая проверку строка, содержащая команду
      */
     private static void whichCommand(String command) {
         int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
@@ -64,5 +72,9 @@ enum CommandType {
     ADD,
     UPDATE,
     REMOVE_BY_ID,
-    EXECUTE_SCRIPT;
+    EXECUTE_SCRIPT,
+    HELP,
+    SHOW,
+    CLEAR,
+    INFO;
 }

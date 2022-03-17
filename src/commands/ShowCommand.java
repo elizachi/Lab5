@@ -15,7 +15,7 @@ public class ShowCommand implements Command{
     private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
     private final DAO arrayDequeDAO;
 
-    ShowCommand(Deque<HumanBeing> humanCollection, DAO arrayDequeDAO){
+    public ShowCommand(Deque<HumanBeing> humanCollection, DAO arrayDequeDAO){
         this.humanCollection = humanCollection;
         this.arrayDequeDAO = arrayDequeDAO;
     }
@@ -23,10 +23,14 @@ public class ShowCommand implements Command{
     @Override
     public void execute(InputHandler reader) {
         int id = humanCollection.getLast().getId();
-        for (int i=0; i<id; i++){
-            if (arrayDequeDAO.get(i) != null){
-                System.out.print(arrayDequeDAO.get(i));
+        if (!(humanCollection.isEmpty())) {
+            for (int i = 0; i < id; i++) {
+                if (arrayDequeDAO.get(i) != null) {
+                    System.out.print(arrayDequeDAO.get(i));
+                }
             }
+        } else {
+            System.err.print("show: Коллекция пустая!\n");
         }
     }
 }
