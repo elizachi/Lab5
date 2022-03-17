@@ -2,6 +2,10 @@ package commands;
 
 import handlers.InputHandler;
 
+/**
+ * Класс команды help
+ * Выводит справку по доступным командам
+ */
 public class HelpCommand implements Command{
 
     @Override

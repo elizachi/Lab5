@@ -6,6 +6,10 @@ import service.AskInput;
 import service.FormedManager;
 import source.HumanBeing;
 
+/**
+ * Класс команды update id {element}
+ * Обновляет значение элемента коллекции, id которого равен заданному
+ */
 public class UpdateCommand implements Command {
     private final DAO arrayDequeDAO;
     private final FormedManager manager = new FormedManager();

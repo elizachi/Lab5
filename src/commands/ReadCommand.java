@@ -6,6 +6,10 @@ import handlers.InputHandler;
 
 import java.util.ArrayList;
 
+/**
+ * Класс команды help
+ * Выводит первый элемент коллекции
+ */
 public class ReadCommand implements Command {
     private final DAO arrayDequeDAO;
 
