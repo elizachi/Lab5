@@ -9,10 +9,10 @@ import java.util.Deque;
 public final class ArrayDequeDAO implements DAO {
     private static int availableId = 1;
     private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
-    private Generator generator = new Generator();
+    private final Generator generator = new Generator();
 
     /**
-     * Добавление нового элемента у коллекцию
+     * Добавление нового элемента в коллекцию
      * @param newHuman - новый элемент коллекции
      * @return         - id нового элемента коллекции
      */
@@ -21,6 +21,7 @@ public final class ArrayDequeDAO implements DAO {
         humanCollection.add(newHuman);
         generator.generateID(newHuman);
         generator.generateCreationDate(newHuman);
+
         return availableId++;
     }
 

@@ -31,8 +31,8 @@ public class CommandManager {
     }
 
     /**
-     * Меняет тип считывания на считывание с файла
-     * Отключает дружетвенный интерфейс, если он включён
+     * Меняет тип считывания на считывание с файла.
+     * Отключает дружественный интерфейс, если он включён
      */
     public static void turnOnFile(BufferedInputStream bufferedInput) {
         reader = new FileInputHandler(bufferedInput);
