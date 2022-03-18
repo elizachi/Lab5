@@ -25,17 +25,16 @@ public class FileInputHandler extends InputHandler {
         int i;
         try {
             while((i = bufferedInput.read()) != -1) {
-                if(i != ' ' && i != '\n' && i != '\r') {
+                if(i != '\n' && i != '\r') {
                     word += (char)i;
                 } else if(i == '\n') break;
-            } if(i == -1) {
-                CommandManager.turnOnConsole();
+            } if(i == -1 && word.equals("")) {
+                return null;
             }
         } catch (IOException e) {
-            System.err.print("Произошла ошибка.\n");
-            word = null;
+            return null;
         }
         numberOfString++;
-        return word;
+        return word.split(" ")[0];
     }
 }

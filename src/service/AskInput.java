@@ -1,7 +1,7 @@
 package service;
 
+import exceptions.EndException;
 import handlers.ConsoleInputHandler;
-import handlers.FileInputHandler;
 import handlers.InputHandler;
 import source.Car;
 import source.Coordinates;
@@ -42,17 +42,19 @@ public class AskInput {
         friendlyInterface = false;
     }
 
+
     /**
      * Запрашивает ввод команды
      * @param in
      * @return
      */
-    public static String askCommand(InputHandler in) {
+    public static String askCommand(InputHandler in) throws EndException{
         String command = null;
         while(command == null) {
             printMessage("Введите команду:");
             try {
                 command = in.readInput();
+                if(command == null) throw new EndException("Чтение данных будет продолжаться с консоли.\n");
                 CommandType.valueOf(command.toUpperCase()).ordinal();
             } catch(IllegalArgumentException e) {
                 if(friendlyInterface) {
@@ -64,9 +66,7 @@ public class AskInput {
                     }
                     command = null;
                 } else {
-                    System.err.print("Команда введена неверно. Строка " + FileInputHandler.getNumberOfString() +
-                            " будет проигнорирована.\n");
-                    return null;
+                    throw new EndException("Команду невозможно распознать, она будет проигнорирована.\n");
                 }
             }
         }
@@ -78,12 +78,13 @@ public class AskInput {
      * @param in - объект класса хендлеров, позволяющий считывать данные либо с консоли, либо с файла
      * @return корректное запрошенное поле класса
      */
-    public static int askId(InputHandler in) {
+    public static int askId(InputHandler in) throws EndException{
         String input = null;
         while(input == null) {
             printMessage("Введите id: ");
             try {
                 input = in.readInput();
+                if(input == null) throw new EndException("");
                 if(Integer.parseInt(input) <= 0) throw new NumberFormatException();
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) {

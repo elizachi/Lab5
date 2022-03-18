@@ -1,6 +1,7 @@
 package commands;
 
 import dao.DAO;
+import exceptions.EndException;
 import handlers.InputHandler;
 import service.AskInput;
 import service.FormedManager;
@@ -16,7 +17,13 @@ public class UpdateCommand implements Command {
 
     @Override
     public void execute(InputHandler reader) {
-        int id = AskInput.askId(reader);
+        int id = 0;
+        try {
+            id = AskInput.askId(reader);
+        } catch (EndException e) {
+            System.err.print("Ожидаемое поле не было получено. Команда будет проигнорирована.\n");
+            return;
+        }
         if(arrayDequeDAO.get(id) != null) {
             HumanBeing existedHuman = manager.formed(reader);
             arrayDequeDAO.update(id, existedHuman);
