@@ -1,26 +1,24 @@
 package commands;
 
+import dao.DAO;
 import handlers.InputHandler;
-import source.HumanBeing;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 /**
  * Класс команды head
  * Выводит первый элемент коллекции
  */
 public class HeadCommand implements Command{
-    private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
+    private final DAO arrayDequeDAO;
 
-    public HeadCommand(Deque<HumanBeing> humanCollection){
-        this.humanCollection = humanCollection;
+    public HeadCommand(DAO arrayDequeDAO){
+        this.arrayDequeDAO = arrayDequeDAO;
     }
 
     @Override
     public void execute(InputHandler reader) {
-        if (!(humanCollection.isEmpty())){
-            System.out.print("head: Первый элемент коллекции - " + humanCollection.getFirst() + "\n");
+        if (arrayDequeDAO.size() != 0) {
+            System.out.print("head: " + arrayDequeDAO.show() +"\n");
         } else {
             System.err.print("head: Sorry, коллекция пуста.\n");
         }

@@ -1,27 +1,28 @@
 package commands;
 
+import dao.DAO;
 import handlers.InputHandler;
-import source.HumanBeing;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 /**
  * Класс команды clear
  * Очищает коллекцию
  */
 public class ClearCommand implements Command{
-    private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
+    private final DAO arrayDequeDAO;
 
-    public ClearCommand(Deque<HumanBeing> humanCollection){
-        this.humanCollection = humanCollection;
+    public ClearCommand(DAO arrayDequeDAO){
+        this.arrayDequeDAO = arrayDequeDAO;
     }
 
     @Override
     public void execute(InputHandler reader) {
-        if (!(humanCollection.isEmpty())){
-            humanCollection.clear();
-            System.out.print("clear: Коллекция очищена!\n");
+        if (arrayDequeDAO.size() != 0) {
+            for (int i=0; i < arrayDequeDAO.getAvailableId(); i++){
+                if (arrayDequeDAO.get(i) != null){
+                    arrayDequeDAO.remove(i);
+                }
+            }
+            System.out.print("clear: Коллекция успешно очищена.\n");
         } else {
             System.err.print("clear: Коллекция и так пуста.\n");
         }

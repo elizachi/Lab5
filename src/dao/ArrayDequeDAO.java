@@ -67,4 +67,19 @@ public final class ArrayDequeDAO implements DAO {
         }
         return null;
     }
+
+    @Override
+    public HumanBeing show() {
+        return humanCollection.peek();
+    }
+
+    @Override
+    public int size(){
+        return humanCollection.size();
+    }
+
+    @Override
+    public int getAvailableId(){
+        return availableId;
+    }
 }

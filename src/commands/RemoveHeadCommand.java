@@ -1,26 +1,24 @@
 package commands;
 
+import dao.DAO;
 import handlers.InputHandler;
-import source.HumanBeing;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 /**
  * Класс команды help
  * Выводит первый элемент коллекции и удалить его
  */
 public class RemoveHeadCommand implements Command{
-    private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
+    private final DAO arrayDequeDAO;
 
-    public RemoveHeadCommand(Deque<HumanBeing> humanCollection){
-        this.humanCollection = humanCollection;
+    public RemoveHeadCommand(DAO arrayDequeDAO){
+        this.arrayDequeDAO = arrayDequeDAO;
     }
 
     @Override
     public void execute(InputHandler reader) {
-        if (!(humanCollection.isEmpty())){
-            System.out.print("remove_head: Первый элемент коллекции - " + humanCollection.removeFirst() + "\n");
+        if (arrayDequeDAO.size() != 0) {
+            System.out.print("remove_head: элемент " + arrayDequeDAO.show() + " успешно удалён!\n");
+            arrayDequeDAO.remove(arrayDequeDAO.show().getId());
         } else {
             System.err.print("remove_head: Sorry, коллекция пуста.\n");
         }
