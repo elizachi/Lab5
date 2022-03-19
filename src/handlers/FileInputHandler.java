@@ -20,20 +20,18 @@ public class FileInputHandler extends InputHandler {
      * @return одно слово указанного файла
      */
     @Override
-    public String readInput() {
+    public String readInput() throws IOException{
         String word = "";
         int i;
-        try {
             while((i = bufferedInput.read()) != -1) {
                 if(i != '\n' && i != '\r') {
                     word += (char)i;
                 } else if(i == '\n') break;
-            } if(i == -1 && word.equals("")) {
-                return null;
+            } if(i == -1) {
+                // автоматическое переключение на считывание с консоли тк файл уже закончился
+                CommandManager.turnOnConsole();
+                bufferedInput.close();
             }
-        } catch (IOException e) {
-            return null;
-        }
         numberOfString++;
         return word.split(" ")[0];
     }
