@@ -9,23 +9,25 @@ import source.Mood;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Класс, позволяющий переключать дружественный интерфейс для быстрой тестировки
  * а также сразу обрабатывающий строку на наличие ошибок, связанных с типом данных
  */
 public class AskInput {
+    private static boolean CONST_FRIENDLY_INTERFACE;
     private static boolean friendlyInterface;
 
     /**
      * Метод, позволяющй включить дружественный интерфейс
      */
     public static void turnOnFriendly() {
-        InputHandler inputHandler = new ConsoleInputHandler();
+        ConsoleInputHandler inputHandler = new ConsoleInputHandler();
         System.out.println("Включить дружественный интерфейс?");
         String input = inputHandler.readInput().toLowerCase();
         try {
-            friendlyInterface = getBooleanInput(input);
+            CONST_FRIENDLY_INTERFACE = getBooleanInput(input);
         } catch(NumberFormatException e) {
             System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
             turnOnFriendly();
@@ -42,7 +44,9 @@ public class AskInput {
         friendlyInterface = false;
     }
 
-
+    public static void returnFriendly() {
+        friendlyInterface = CONST_FRIENDLY_INTERFACE;
+    }
     /**
      * Запрашивает ввод команды
      * @param in
@@ -54,20 +58,22 @@ public class AskInput {
             printMessage("Введите команду:");
             try {
                 command = in.readInput();
-                if(command == null) throw new EndException("Чтение данных будет продолжаться с консоли.\n");
                 CommandType.valueOf(command.toUpperCase()).ordinal();
             } catch(IllegalArgumentException e) {
-                if(friendlyInterface) {
+                if(friendlyInterface && in.getClass() == ConsoleInputHandler.class) {
                     if(!command.isEmpty()) {
                         System.err.print("Команада введена неверно. Повторите попытку.\n");
-                    }
-                    else {
+                    } else {
                         System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                     }
                     command = null;
                 } else {
                     throw new EndException("Команду невозможно распознать, она будет проигнорирована.\n");
                 }
+            } catch (IOException e) {
+                CommandManager.turnOnConsole();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
             }
         }
         return command;
@@ -84,16 +90,22 @@ public class AskInput {
             printMessage("Введите id: ");
             try {
                 input = in.readInput();
-                if(input == null) throw new EndException("");
                 if(Integer.parseInt(input) <= 0) throw new NumberFormatException();
             } catch(NumberFormatException e) {
-                if(!input.isEmpty()) {
-                    System.err.print("Id введен неверно. Повторите попытку.\n");
+                if(friendlyInterface && in.getClass() == ConsoleInputHandler.class) {
+                    if(!input.isEmpty()) {
+                        System.err.print("Id введен неверно. Повторите попытку.\n");
+                    } else {
+                        System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
+                    }
+                    input = null;
+                } else {
+                    throw new EndException("Id введен неверно. Команда будет проигнорирована.\n");
                 }
-                else {
-                    System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
-                }
-                input = null;
+            } catch (IOException e) {
+                CommandManager.turnOnConsole();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
             }
         }
         return Integer.parseInt(input);
@@ -109,6 +121,10 @@ public class AskInput {
             } catch (IllegalArgumentException e) {
                 System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return input;
@@ -124,6 +140,10 @@ public class AskInput {
             } catch (IllegalArgumentException e) {
                 System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return input;
@@ -144,6 +164,10 @@ public class AskInput {
                     System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                 }
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return Long.parseLong(input);
@@ -159,11 +183,14 @@ public class AskInput {
             } catch(NumberFormatException e) {
                 if(!input.isEmpty()) {
                     System.err.print("Поле impactSpeed введено неверно. Повторите попытку.\n");
-                }
-                else {
+                } else {
                     System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                 }
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return Integer.parseInt(input);
@@ -182,6 +209,10 @@ public class AskInput {
             } catch (IllegalArgumentException e) {
                 System.err.print("Поле realHero введено неверно. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return getBooleanInput(input);
@@ -200,6 +231,10 @@ public class AskInput {
             } catch (IllegalArgumentException e) {
                 System.err.print("Поле realHero введено неверно. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return getBooleanInput(input);
@@ -217,6 +252,10 @@ public class AskInput {
                 if(!input.isEmpty()) System.err.print("Координата x введена неверно. Повторите попытку.\n");
                 else System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         int x = Integer.parseInt(input);
@@ -230,6 +269,10 @@ public class AskInput {
                 if(!input.isEmpty()) System.err.print("Координата y введена неверно. Повторите попытку.\n");
                 else System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         Float y = Float.parseFloat(input);
@@ -250,6 +293,10 @@ public class AskInput {
             } catch (IllegalArgumentException e) {
                 System.err.print("Поле mood введено неверно. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         return Mood.valueOf(input.toUpperCase());
@@ -268,6 +315,10 @@ public class AskInput {
             } catch(IllegalArgumentException e) {
                 printMessage("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m");
                 name = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         input = null;
@@ -282,22 +333,34 @@ public class AskInput {
             } catch (IllegalArgumentException e) {
                 System.err.print("Поле cool введено неверно. Повторите попытку.\n");
                 input = null;
+            } catch (IOException e) {
+                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
+                CommandManager.turnOnConsole();
             }
         }
         boolean cool = getBooleanInput(input);
         return new Car(name, cool);
     }
 
-    public FileInputStream askFileName(InputHandler in) {
+    public FileInputStream askFileName(InputHandler in) throws EndException{
         FileInputStream fileInput = null;
         while(fileInput == null) {
             printMessage("Введите путь до файла, который хотите прочесть.");
-            String fileName = in.readInput();
             try {
+                String fileName = in.readInput();
                 fileInput = new FileInputStream(fileName);
             } catch (FileNotFoundException e) {
-                printMessage("Файл не найден. Проверьте корректность указанного пути и повторите попытку.\n");
-                fileInput = null;
+                if(friendlyInterface && in.getClass() == ConsoleInputHandler.class) {
+                    printMessage("Файл не найден. Проверьте корректность указанного пути и повторите попытку.\n");
+                    fileInput = null;
+                } else {
+                    throw new EndException("Файл не найден. Команда будет проигнорирована.\n");
+                }
+            } catch (IOException e) {
+                CommandManager.turnOnConsole();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла. " +
+                        "Пожалуйста, работайте с консолью.\n");
             }
         }
         return fileInput;

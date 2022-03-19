@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.EndException;
 import handlers.InputHandler;
 import service.AskInput;
 import service.CommandManager;
@@ -12,8 +13,15 @@ public class ScriptCommand implements Command{
 
     @Override
     public void execute(InputHandler reader) {
-        // считываем имя файла
-        FileInputStream usableFile = request.askFileName(reader);
+        FileInputStream usableFile;
+        try {
+            // считываем имя файла
+            usableFile = request.askFileName(reader);
+        } catch (EndException e) {
+            System.err.print(e.getMessage());
+            return;
+        }
+        // если все хорошо создаем BufferedInputStream, при помощи которого будем считывать с файла
         BufferedInputStream bufferedInput = new BufferedInputStream(usableFile);
         // меняем тип считывания на файловый
         CommandManager.turnOnFile(bufferedInput);

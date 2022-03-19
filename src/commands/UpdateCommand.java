@@ -21,7 +21,7 @@ public class UpdateCommand implements Command {
         try {
             id = AskInput.askId(reader);
         } catch (EndException e) {
-            System.err.print("Ожидаемое поле не было получено. Команда будет проигнорирована.\n");
+            System.err.print(e.getMessage());
             return;
         }
         if(arrayDequeDAO.get(id) != null) {

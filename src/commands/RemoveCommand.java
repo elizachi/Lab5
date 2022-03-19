@@ -18,6 +18,7 @@ public class RemoveCommand implements Command {
         try {
             id = AskInput.askId(reader);
         } catch (EndException e) {
+            System.err.print(e.getMessage());
             return;
         }
         if(arrayDequeDAO.get(id) != null) {

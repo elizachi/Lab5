@@ -1,5 +1,6 @@
 package others;
 
+import service.AskInput;
 import service.CommandManager;
 
 public class DataBaseRunner {
@@ -9,9 +10,11 @@ public class DataBaseRunner {
      * @param args
      */
     public static void main(String [] args) {
-        // считывать начинаем с консоли
+        // Запрос на включение дружественного интерфейса
+        AskInput.turnOnFriendly();
+        // Включение считывание с консоли
         CommandManager.turnOnConsole();
-        // запускаем менеджер-определитель команды
+        // Определение введённой команды
         CommandManager.whichCommand();
     }
 

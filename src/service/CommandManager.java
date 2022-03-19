@@ -27,14 +27,10 @@ public class CommandManager {
      */
     public static void turnOnConsole() {
         reader = new ConsoleInputHandler();
-        AskInput.turnOnFriendly();
+        // Возврат к дружественному интерфейсу после считывания с файла, если оно было
+        AskInput.returnFriendly();
     }
 
-    public static void turnOnConsole(String message) {
-        System.out.print("\u001B[33m"+message+"\u001B[0m");
-        reader = new ConsoleInputHandler();
-        AskInput.turnOnFriendly();
-    }
     /**
      * Меняет тип считывания на считывание с файла
      * Отключает дружетвенный интерфейс, если он включён
@@ -52,7 +48,7 @@ public class CommandManager {
         try {
             command = AskInput.askCommand(reader);
         } catch(EndException e) {
-            CommandManager.turnOnConsole(e.getMessage());
+            System.err.print(e.getMessage());
             whichCommand();
             return;
         }
