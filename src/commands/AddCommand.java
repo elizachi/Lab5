@@ -3,6 +3,7 @@ package commands;
 import dao.DAO;
 import exceptions.EndException;
 import handlers.InputHandler;
+import service.AskInput;
 import service.FormedManager;
 import source.HumanBeing;
 
@@ -11,7 +12,8 @@ import source.HumanBeing;
  */
 public class AddCommand implements Command {
     private final DAO arrayDequeDAO;
-    private final FormedManager manager = new FormedManager();
+    private final AskInput request = new AskInput();
+    private final FormedManager manager = new FormedManager(request);
 
     public AddCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;

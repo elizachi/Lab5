@@ -1,8 +1,6 @@
 package service;
 
-import human_being.HumanBeing;
-
-import java.util.ArrayDeque;
+import source.HumanBeing;
 
 public class GenerateID {
     private static int availableId = 1;

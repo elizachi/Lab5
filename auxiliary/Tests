@@ -5,10 +5,18 @@ COMMAND <name> <sountrackName> <minutesOfWaiting> <impactSpeed> <realHero> <hasT
 <carName> <cool>
 
 Тест 1:
-add cat nyan-cat 5 12 True True
-4 5.123
+add
+cat
+nyan-cat
+5
+12
+True
+True
+4
+5.123
 sadness
-McQueen True
+McQueen
+True
 
 Тест 2:
 update 1

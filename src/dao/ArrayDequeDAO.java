@@ -1,9 +1,11 @@
 package dao;
 
-import human_being.HumanBeing;
 import service.GenerateID;
+import service.Generator;
+import source.HumanBeing;
 
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Deque;
 
 public final class ArrayDequeDAO implements DAO {
@@ -65,5 +67,10 @@ public final class ArrayDequeDAO implements DAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public Collection<HumanBeing> show() {
+        return humanCollection;
     }
 }

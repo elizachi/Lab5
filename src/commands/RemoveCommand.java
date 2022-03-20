@@ -7,6 +7,7 @@ import service.AskInput;
 
 public class RemoveCommand implements Command {
     private final DAO arrayDequeDAO;
+    private final AskInput request = new AskInput();
 
     public RemoveCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
@@ -16,7 +17,7 @@ public class RemoveCommand implements Command {
     public void execute(InputHandler reader) {
         int id = 0;
         try {
-            id = AskInput.askId(reader);
+            id = request.askId(reader);
         } catch (EndException e) {
             System.err.print(e.getMessage());
             return;

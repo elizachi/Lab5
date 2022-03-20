@@ -9,7 +9,8 @@ import source.HumanBeing;
 
 public class UpdateCommand implements Command {
     private final DAO arrayDequeDAO;
-    private final FormedManager manager = new FormedManager();
+    private final AskInput request = new AskInput();
+    private final FormedManager manager = new FormedManager(request);
 
     public UpdateCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
@@ -19,7 +20,7 @@ public class UpdateCommand implements Command {
     public void execute(InputHandler reader) {
         int id = 0;
         try {
-            id = AskInput.askId(reader);
+            id = request.askId(reader);
         } catch (EndException e) {
             System.err.print(e.getMessage());
             return;

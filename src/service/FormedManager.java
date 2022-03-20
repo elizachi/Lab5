@@ -5,7 +5,11 @@ import handlers.InputHandler;
 import source.HumanBeing;
 
 public class FormedManager {
-    private final AskInput request = new AskInput();
+    private final AskInput request;
+
+    public FormedManager(AskInput request) {
+        this.request = request;
+    }
 
     public HumanBeing formed(InputHandler reader) throws EndException {
         return new HumanBeing(

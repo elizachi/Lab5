@@ -84,7 +84,7 @@ public class AskInput {
      * @param in - объект класса хендлеров, позволяющий считывать данные либо с консоли, либо с файла
      * @return корректное запрошенное поле класса
      */
-    public static int askId(InputHandler in) throws EndException{
+    public int askId(InputHandler in) throws EndException{
         String input = null;
         while(input == null) {
             printMessage("Введите id: ");
