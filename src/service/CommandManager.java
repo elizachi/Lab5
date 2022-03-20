@@ -19,7 +19,8 @@ public class CommandManager {
             new UpdateCommand(database),
             new RemoveCommand(database),
             new ScriptCommand(),
-            new FilterByMinutesCommand(database)
+            new FilterByMinutesCommand(database),
+            new PrintUniqueSpeed(database)
     };
 
     /**
@@ -66,5 +67,6 @@ enum CommandType {
     UPDATE,
     REMOVE_BY_ID,
     EXECUTE_SCRIPT,
-    FILTER_BY_MINUTES_OF_WAITING;
+    FILTER_BY_MINUTES_OF_WAITING,
+    PRINT_UNIQUE_IMPACT_SPEED;
 }
