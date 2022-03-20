@@ -23,19 +23,16 @@ public class CommandManager {
     private static final Command[] commands = {
             new AddCommand(database),
             new ClearCommand(database),
+            new FilterByMinutesCommand(database),
             new HeadCommand(database),
             new HelpCommand(),
             new InfoCommand(database),
-            // new ReadCommand(database),
-            new UpdateCommand(database),
+            new PrintUniqueSpeed(database),
             new RemoveCommand(database),
             new RemoveHeadCommand(database),
             new ScriptCommand(),
             new ShowCommand(database),
             new UpdateCommand(database)
-            new ScriptCommand(),
-            new FilterByMinutesCommand(database),
-            new PrintUniqueSpeed(database)
     };
 
     /**
@@ -80,15 +77,14 @@ public class CommandManager {
 enum CommandType {
     ADD,
     CLEAR,
+    FILTER_BY_MINUTES_OF_WAITING,
     HEAD,
     HELP,
     INFO,
+    PRINT_UNIQUE_IMPACT_SPEED,
     REMOVE_BY_ID,
     REMOVE_HEAD,
     EXECUTE_SCRIPT,
     SHOW,
     UPDATE;
-    EXECUTE_SCRIPT,
-    FILTER_BY_MINUTES_OF_WAITING,
-    PRINT_UNIQUE_IMPACT_SPEED;
 }

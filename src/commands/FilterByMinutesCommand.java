@@ -20,7 +20,7 @@ public class FilterByMinutesCommand implements Command{
     public void execute(InputHandler reader) {
         try {
             long minutes = request.askMinutesOfWaiting(reader);
-            List<HumanBeing> listOfHumans = arrayDequeDAO.show()
+            List<HumanBeing> listOfHumans = arrayDequeDAO.getAll()
                     .stream()
                     .filter(human -> human.getMinutesOfWaiting() == minutes)
                     .collect(Collectors.toList());

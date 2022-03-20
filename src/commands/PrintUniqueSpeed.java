@@ -16,7 +16,7 @@ public class PrintUniqueSpeed implements Command {
     @Override
     public void execute(InputHandler reader) {
         List<Integer> uniqueFieldsSpeed = new ArrayList<Integer>();
-        for(HumanBeing human: arrayDequeDAO.show()) {
+        for(HumanBeing human: arrayDequeDAO.getAll()) {
             Integer speed = human.getImpactSpeed();
             if(!uniqueFieldsSpeed.contains(speed)) {
                 uniqueFieldsSpeed.add(speed);

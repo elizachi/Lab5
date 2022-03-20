@@ -9,8 +9,8 @@ public interface DAO {
     void update(int id, HumanBeing human);
     void remove(int id);
     HumanBeing get(int id);
-    HumanBeing show();
+    Collection<HumanBeing> getAll();
     int size();
     int getAvailableId();
-    Collection<HumanBeing> show();
+    HumanBeing show();
 }
