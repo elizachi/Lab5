@@ -17,9 +17,9 @@ public class CommandManager {
     private static final Command[] commands = {
             new AddCommand(database),
             new UpdateCommand(database),
-            // new ReadCommand(database),
             new RemoveCommand(database),
-            new ScriptCommand()
+            new ScriptCommand(),
+            new FilterByMinutesCommand(database)
     };
 
     /**
@@ -65,5 +65,6 @@ enum CommandType {
     ADD,
     UPDATE,
     REMOVE_BY_ID,
-    EXECUTE_SCRIPT;
+    EXECUTE_SCRIPT,
+    FILTER_BY_MINUTES_OF_WAITING;
 }
