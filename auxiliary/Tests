@@ -4,7 +4,7 @@ COMMAND
 <sountrackName>
 <minutesOfWaiting>
 <impactSpeed>
-<realHero>     //может быть null
+<realHero>
 <hasToothpick> //может быть null
 <x> <y>
 <mood>         //может быть null

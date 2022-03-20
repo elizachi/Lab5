@@ -156,10 +156,26 @@ public class HumanBeing implements Comparable {
         return result;
     }
 
+    private String getStringMood(){
+        if (getMood() == null) {
+            return "нет";
+        } else {
+            return getMood().toString();
+        }
+    }
+
+    private String getStringToothpick(){
+        if (hasToothpick == null){
+            return "нет";
+        } else {
+            return String.valueOf(isHasToothpick());
+        }
+    }
+
     @Override
     public String toString(){
-        return "Имя - " + getName() + ", саундтрек - " + getSoundtrackName() + ", настроение - " + getMood().toString()
+        return "Имя - " + getName() + ", саундтрек - " + getSoundtrackName() + ", настроение - " + getStringMood()
                 + ", машина - " + getCar().toString() + ", координаты - " + getCoordinates().toString() + ", статус героя - " + isRealHero()
-                + ", статус зубочистки - " + isHasToothpick() + ", ждёт " + getMinutesOfWaiting().toString() + " минут.";
+                + ", статус зубочистки - " + getStringToothpick() + ", ждёт " + getMinutesOfWaiting().toString() + " минут(ы).";
     }
 }

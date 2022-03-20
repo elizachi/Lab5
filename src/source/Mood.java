@@ -4,5 +4,7 @@ public enum Mood {
     SADNESS,
     LONGING,
     GLOOM,
-    RAGE
+    RAGE;
+
+
 }

@@ -40,15 +40,20 @@ public class Car implements Comparable {
         return result;
     }
 
-    @Override
-    public String toString(){
+    private String getStringName(){
         if (getCarName() != null){
             return getCarName() + ", ";
-        }
-        if (getCarCool()){
-            return "крутая тачка";
         } else {
-            return "среднячок";
+            return "";
+        }
+    }
+
+    @Override
+    public String toString(){
+        if (getCarCool()){
+            return getStringName() + "крутая тачка";
+        } else {
+            return getStringName() + "среднячок";
         }
     }
 }
