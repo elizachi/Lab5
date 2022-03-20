@@ -4,8 +4,14 @@ import commands.*;
 import dao.*;
 import exceptions.EndException;
 import handlers.*;
+import handlers.ConsoleInputHandler;
+import handlers.FileInputHandler;
+import handlers.InputHandler;
+import source.HumanBeing;
 
 import java.io.BufferedInputStream;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Класс обработчик, определяющий команду и ее поведение по отношению к входным данным
@@ -16,8 +22,17 @@ public class CommandManager {
 
     private static final Command[] commands = {
             new AddCommand(database),
+            new ClearCommand(database),
+            new HeadCommand(database),
+            new HelpCommand(),
+            new InfoCommand(database),
+            // new ReadCommand(database),
             new UpdateCommand(database),
             new RemoveCommand(database),
+            new RemoveHeadCommand(database),
+            new ScriptCommand(),
+            new ShowCommand(database),
+            new UpdateCommand(database)
             new ScriptCommand(),
             new FilterByMinutesCommand(database),
             new PrintUniqueSpeed(database)
@@ -33,8 +48,8 @@ public class CommandManager {
     }
 
     /**
-     * Меняет тип считывания на считывание с файла
-     * Отключает дружетвенный интерфейс, если он включён
+     * Меняет тип считывания на считывание с файла.
+     * Отключает дружественный интерфейс, если он включён
      */
     public static void turnOnFile(BufferedInputStream bufferedInput) {
         reader = new FileInputHandler(bufferedInput);
@@ -64,8 +79,15 @@ public class CommandManager {
  */
 enum CommandType {
     ADD,
-    UPDATE,
+    CLEAR,
+    HEAD,
+    HELP,
+    INFO,
     REMOVE_BY_ID,
+    REMOVE_HEAD,
+    EXECUTE_SCRIPT,
+    SHOW,
+    UPDATE;
     EXECUTE_SCRIPT,
     FILTER_BY_MINUTES_OF_WAITING,
     PRINT_UNIQUE_IMPACT_SPEED;

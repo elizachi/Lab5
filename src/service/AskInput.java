@@ -369,7 +369,7 @@ public class AskInput {
         }
         input = null;
         while(input == null) {
-            printMessage("Машина была крутой? ");
+            printMessage("Машина крутая? ");
             try {
                 input = in.readInput();
                 getBooleanInput(input);

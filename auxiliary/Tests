@@ -1,14 +1,15 @@
 Формат ввода команд:
 COMMAND <name> <sountrackName> <minutesOfWaiting> <impactSpeed> <realHero> <hasToothpick>
 <x> <y>
-<mood>
-<carName> <cool>
+<mood>         //может быть null
+<carName>      //может быть null
+<cool>
 
 Тест 1:
 add
 cat
 nyan-cat
-6
+5
 12
 True
 True
@@ -19,8 +20,54 @@ McQueen
 True
 
 Тест 2:
-update 1
-dog piesek 2 15 True False
-4 6.22
+update
+1
+dog
+piesek
+2
+15
+True
+False
+4
+6.22
 longing
-BrokeCar False
+BrokeCar
+False
+
+Тест 3:
+add
+cat
+nyan-cat
+5
+12
+True
+True
+4
+5.123
+sadness
+McQueen
+True
+
+Тест 4:
+add
+cat ffkg dflkdf dflkvmf
+nyan-cat
+5 ffff fffff fffffff
+12 55555 44444 3333
+True fvmdv
+True vfkdmkmvffdfvfdvfdvdvdvfdvd
+4 5.123 kdk mkmfkmdfmdm
+sadness d iodjvodmvkmdmvk
+McQueen True kvd
+
+Тест 5:
+add rfrjtnj ufdyj c.lf ddtle ,e,e,e,e,e
+cat ffkg dflkdf dflkvmf
+nyan-cat
+5 ffff fffff fffffff
+12 55555 44444 3333
+True fvmdv
+True vfkdmkmvffdfvfdvfdvdvdvfdvd
+4 5.123 kdk mkmfkmdfmdm
+sadness d iodjvodmvkmdmvk
+McQueen True kvd
