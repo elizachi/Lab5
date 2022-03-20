@@ -4,6 +4,10 @@ import dao.DAO;
 import handlers.InputHandler;
 import service.AskInput;
 
+/**
+ * Класс команды remove_by_id
+ * Удаляет элемент из коллекции по его id
+ */
 public class RemoveCommand implements Command {
     private final DAO arrayDequeDAO;
 

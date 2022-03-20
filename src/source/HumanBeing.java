@@ -155,4 +155,11 @@ public class HumanBeing implements Comparable {
         }
         return result;
     }
+
+    @Override
+    public String toString(){
+        return "Имя - " + getName() + ", саундтрек - " + getSoundtrackName() + ", настроение - " + getMood().toString()
+                + ", машина - " + getCar().toString() + ", координаты - " + getCoordinates().toString() + ", статус героя - " + isRealHero()
+                + ", статус зубочистки - " + isHasToothpick() + ", ждёт " + getMinutesOfWaiting().toString() + " минут.";
+    }
 }

@@ -7,5 +7,7 @@ public interface DAO {
     void update(int id, HumanBeing human);
     void remove(int id);
     HumanBeing get(int id);
-//    Collection<human_being.HumanBeing> show();
+    HumanBeing show();
+    int size();
+    int getAvailableId();
 }
