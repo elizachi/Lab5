@@ -1,12 +1,13 @@
 package service;
 
+import exceptions.EndException;
 import handlers.InputHandler;
 import source.HumanBeing;
 
 public class FormedManager {
     private final AskInput request = new AskInput();
 
-    public HumanBeing formed(InputHandler reader) {
+    public HumanBeing formed(InputHandler reader) throws EndException {
         return new HumanBeing(
                 request.askName(reader),
                 request.askSoundtrackName(reader),

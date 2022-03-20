@@ -25,7 +25,13 @@ public class UpdateCommand implements Command {
             return;
         }
         if(arrayDequeDAO.get(id) != null) {
-            HumanBeing existedHuman = manager.formed(reader);
+            HumanBeing existedHuman;
+            try {
+                existedHuman = manager.formed(reader);
+            } catch (EndException e) {
+                System.err.print(e.getMessage());
+                return;
+            }
             arrayDequeDAO.update(id, existedHuman);
             System.out.print("update: Ура ура! Элемент обновлён!\n");
         } else {

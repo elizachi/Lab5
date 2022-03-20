@@ -1,6 +1,7 @@
 package commands;
 
 import dao.DAO;
+import exceptions.EndException;
 import handlers.InputHandler;
 import service.FormedManager;
 import source.HumanBeing;
@@ -22,7 +23,13 @@ public class AddCommand implements Command {
      */
     @Override
     public void execute(InputHandler reader) {
-        HumanBeing existedHuman = manager.formed(reader);
+        HumanBeing existedHuman = null;
+        try {
+            existedHuman = manager.formed(reader);
+        } catch (EndException e) {
+            System.err.print(e.getMessage());
+            return;
+        }
         arrayDequeDAO.add(existedHuman);
         System.out.print("add: Ура Ура! Элемент добавлен в коллекцию!\n");
     }
