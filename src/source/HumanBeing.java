@@ -5,18 +5,17 @@ import java.time.LocalDate;
 public class HumanBeing implements Comparable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
     // Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно
     // генерироваться автоматически
-    private boolean realHero;
-    private Boolean hasToothpick; //Поле может быть null
-    private int impactSpeed;
+    private String name; //Поле не может быть null, Строка не может быть пустой
     private String soundtrackName; //Поле не может быть null
     private Long minutesOfWaiting; //Поле не может быть null
+    private int impactSpeed;
+    private boolean realHero;
+    private Boolean hasToothpick; //Поле может быть null
+    private Coordinates coordinates; //Поле не может быть null
     private Mood mood; //Поле может быть null
     private Car car; //Поле не может быть null
-
 
     public HumanBeing(String name, String soundtrackName, Long minutesOfWaiting, int impactSpeed,
                       boolean realHero, Boolean hasToothpick, Coordinates coordinates, Mood mood, Car car) {
@@ -154,5 +153,21 @@ public class HumanBeing implements Comparable {
             }
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "id = " + id +
+                ",\ncreationDate = " + creationDate +
+                ",\nname = " + name +
+                ",\nsoundtrackName = " + soundtrackName +
+                ",\nminutesOfWaiting = " + minutesOfWaiting +
+                ",\nimpactSpeed = " + impactSpeed +
+                ",\nrealHero = " + realHero +
+                ",\nhasToothpick = " + hasToothpick +
+                ",\ncoordinates = " + coordinates +
+                ",\nmood = " + mood +
+                ",\ncar = " + car +
+                '\n';
     }
 }

@@ -9,9 +9,12 @@ public class Car implements Comparable {
         this.cool = cool;
     }
 
-    public Car(boolean cool){
-        this.name = null;
-        this.cool = cool;
+    @Override
+    public String toString() {
+        return "Car {" +
+                "name = " + name +
+                ", cool = " + cool +
+                '}';
     }
 
     public void setCarName(String name) {
