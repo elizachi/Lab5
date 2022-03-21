@@ -1,12 +1,8 @@
 package service;
 
 import commands.*;
-import dao.ArrayDequeDAO;
-import dao.DAO;
-import exceptions.EndException;
-import exceptions.JumpReaderException;
-
-import java.util.jar.JarException;
+import dao.*;
+import exceptions.*;
 
 /**
  * Перечисление существующих команд
@@ -15,6 +11,7 @@ enum CommandType {
     ADD,
     CLEAR,
     FILTER_BY_MINUTES_OF_WAITING,
+    FILTER_GREATER_THAN_IMPACT_SPEED,
     HEAD,
     HELP,
     INFO,
@@ -34,11 +31,12 @@ public class CommandManager {
             new AddCommand(database),
             new ClearCommand(database),
             new FilterByMinutesCommand(database),
+            new FilterGreaterThanSpeedCommand(database),
             new HeadCommand(database),
             new HelpCommand(),
             new InfoCommand(database),
             new PrintUniqueSpeed(database),
-            new RemoveCommand(database),
+            new RemoveByIdCommand(database),
             new RemoveHeadCommand(database),
             new ScriptCommand(),
             new ShowCommand(database),

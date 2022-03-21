@@ -9,11 +9,11 @@ import service.AskInput;
  * Класс команды remove_by_id
  * Удаляет элемент из коллекции по его id
  */
-public class RemoveCommand implements Command {
+public class RemoveByIdCommand implements Command {
     private final DAO arrayDequeDAO;
     private final AskInput request = new AskInput();
 
-    public RemoveCommand(DAO arrayDequeDAO) {
+    public RemoveByIdCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
     }
 

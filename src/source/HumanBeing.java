@@ -1,6 +1,7 @@
 package source;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class HumanBeing implements Comparable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
@@ -169,5 +170,18 @@ public class HumanBeing implements Comparable {
                 ",\nmood = " + mood +
                 ",\ncar = " + car +
                 '\n';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HumanBeing that = (HumanBeing) o;
+        return impactSpeed == that.impactSpeed && realHero == that.realHero && Objects.equals(name, that.name) && Objects.equals(soundtrackName, that.soundtrackName) && Objects.equals(minutesOfWaiting, that.minutesOfWaiting) && Objects.equals(hasToothpick, that.hasToothpick) && Objects.equals(coordinates, that.coordinates) && mood == that.mood && Objects.equals(car, that.car);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, soundtrackName, minutesOfWaiting, impactSpeed, realHero, hasToothpick, coordinates, mood, car);
     }
 }

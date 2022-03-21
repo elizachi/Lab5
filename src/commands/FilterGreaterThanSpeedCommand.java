@@ -9,20 +9,20 @@ import source.HumanBeing;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FilterByMinutesCommand implements Command{
+public class FilterGreaterThanSpeedCommand implements Command{
     private final DAO arrayDequeDAO;
     private final AskInput request = new AskInput();
 
-    public FilterByMinutesCommand(DAO arrayDequeDAO) {
+    public FilterGreaterThanSpeedCommand(DAO arrayDequeDAO) {
         this.arrayDequeDAO = arrayDequeDAO;
     }
     @Override
     public void execute(InputHandler reader) {
         try {
-            long minutes = request.askMinutesOfWaiting(reader);
+            long speed = request.askImpactSpeed(reader);
             List<HumanBeing> listOfHumans = arrayDequeDAO.getAll()
                     .stream()
-                    .filter(human -> human.getMinutesOfWaiting() == minutes)
+                    .filter(human -> human.getMinutesOfWaiting() > speed)
                     .collect(Collectors.toList());
             if(listOfHumans.size() == 0) {
                 System.err.print("Элементов не нашлось.\n");
