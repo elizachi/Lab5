@@ -28,9 +28,9 @@ public class FileInputHandler extends InputHandler {
                     word += (char)i;
                 } else if(i == '\n') break;
             } if(i == -1) {
-                // автоматическое переключение на считывание с консоли тк файл уже закончился
-                ReaderManager.turnOnConsole();
-                bufferedInput.close();
+                // автоматическое переключение на ридер на уровень ниже, т.е. на предыдущий задействованный
+                ReaderManager.returnOnPreviousReader();
+                ReaderManager.removeLast();
             }
         numberOfString++;
         return word.split(" ")[0];

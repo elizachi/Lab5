@@ -1,6 +1,7 @@
 package service;
 
 import exceptions.EndException;
+import exceptions.JumpReaderException;
 import handlers.ConsoleInputHandler;
 import handlers.InputHandler;
 import source.Car;
@@ -10,6 +11,7 @@ import source.Mood;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Класс, позволяющий переключать дружественный интерфейс для быстрой тестировки
@@ -52,10 +54,10 @@ public class AskInput {
      * @param in
      * @return
      */
-    public static String askCommand(InputHandler in) throws EndException{
+    public static String askCommand(InputHandler in) throws EndException, JumpReaderException {
         String command = null;
         while(command == null) {
-            printMessage("Введите команду:");
+            printMessage(in, "Введите команду:");
             try {
                 command = in.readInput();
                 CommandType.valueOf(command.toUpperCase()).ordinal();
@@ -67,13 +69,14 @@ public class AskInput {
                         System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                     }
                     command = null;
+                } else if(in != ReaderManager.getReader() && Objects.equals(command, "")) {
+                    throw new JumpReaderException("");
                 } else {
                     throw new EndException("Команду невозможно распознать, она будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                ReaderManager.turnOnConsole();
-                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return command;
@@ -103,9 +106,8 @@ public class AskInput {
                     throw new EndException("Id введен неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                ReaderManager.turnOnConsole();
-                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return Integer.parseInt(input);
@@ -126,9 +128,8 @@ public class AskInput {
                     throw new EndException("Поле name введено неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return input;
@@ -149,9 +150,8 @@ public class AskInput {
                     throw new EndException("Поле soundtrackName введено неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return input;
@@ -177,9 +177,8 @@ public class AskInput {
                     throw new EndException("Поле minutesOfWaiting введено неверно. Команада будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return Long.parseLong(input);
@@ -204,9 +203,8 @@ public class AskInput {
                     throw new EndException("Поле impactSpeed введено неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return Integer.parseInt(input);
@@ -234,9 +232,9 @@ public class AskInput {
                     throw new EndException("Поле realHero введено неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return getBooleanInput(input);
@@ -260,9 +258,8 @@ public class AskInput {
                     throw new EndException("Поле hasToothpick введено неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return getBooleanInput(input);
@@ -288,9 +285,8 @@ public class AskInput {
                     throw new EndException("Координата x введена неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         int x = Integer.parseInt(input);
@@ -312,9 +308,8 @@ public class AskInput {
                     throw new EndException("Координата y введена неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         Float y = Float.parseFloat(input);
@@ -340,9 +335,8 @@ public class AskInput {
                     throw new EndException("Поле mood введено неверно. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return Mood.valueOf(input.toUpperCase());
@@ -362,9 +356,8 @@ public class AskInput {
                 printMessage("\u001B[33mВы ввели пустую строку. Поле примет значение null.\u001B[0m");
                 name = null;
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         input = null;
@@ -388,9 +381,8 @@ public class AskInput {
                     throw new EndException("Поле cool введено неверно. Команада будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                System.err.print("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
-                ReaderManager.turnOnConsole();
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         boolean cool = getBooleanInput(input);
@@ -412,9 +404,8 @@ public class AskInput {
                     throw new EndException("Файл не найден. Команда будет проигнорирована.\n");
                 }
             } catch (IOException e) {
-                ReaderManager.turnOnConsole();
-                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла. " +
-                        "Пожалуйста, работайте с консолью.\n");
+                ReaderManager.returnOnPreviousReader();
+                throw new EndException("Произошла ошибка, невозможно прочитать данные из файла.\n");
             }
         }
         return fileInput;
@@ -440,6 +431,11 @@ public class AskInput {
      */
     private static void printMessage(String message){
         if (friendlyInterface) {
+            System.out.println(message);
+        }
+    }
+    private static void printMessage(InputHandler in, String message){
+        if (friendlyInterface && in.getClass() == ConsoleInputHandler.class) {
             System.out.println(message);
         }
     }

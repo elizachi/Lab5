@@ -13,9 +13,14 @@ import java.util.ArrayList;
 public class ReaderManager {
     private static InputHandler reader;
     private static ArrayList<InputHandler> handlers = new ArrayList<>();
+    private int index = 0;
 
     public static InputHandler getReader() {
         return reader;
+    }
+
+    public static void removeLast() {
+        handlers.remove(handlers.size() - 1);
     }
     /**
      * Меняет тип считывания на считывание с консоли
@@ -29,9 +34,10 @@ public class ReaderManager {
         AskInput.returnFriendly();
     }
 
-//    public static void returnOnPreviousReader() {
-//
-//    }
+    public static void returnOnPreviousReader() {
+        reader = handlers.get(handlers.size()-1);
+        AskInput.returnFriendly();
+    }
 
     /**
      * Меняет тип считывания на считывание с файла.

@@ -4,6 +4,9 @@ import commands.*;
 import dao.ArrayDequeDAO;
 import dao.DAO;
 import exceptions.EndException;
+import exceptions.JumpReaderException;
+
+import java.util.jar.JarException;
 
 /**
  * Перечисление существующих команд
@@ -48,7 +51,7 @@ public class CommandManager {
         String command;
         try {
             command = AskInput.askCommand(ReaderManager.getReader());
-        } catch(EndException e) {
+        } catch(EndException | JumpReaderException e) {
             System.err.print(e.getMessage());
             whichCommand();
             return;
