@@ -1,8 +1,6 @@
 package service;
 
-import handlers.ConsoleInputHandler;
-import handlers.FileInputHandler;
-import handlers.InputHandler;
+import handlers.*;
 
 import java.io.BufferedInputStream;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.ArrayList;
 public class ReaderManager {
     private static InputHandler reader;
     private static ArrayList<InputHandler> handlers = new ArrayList<>();
-    private int index = 0;
 
     public static InputHandler getReader() {
         return reader;

@@ -1,16 +1,13 @@
 package service;
 
-import exceptions.EndException;
-import exceptions.JumpReaderException;
-import handlers.ConsoleInputHandler;
-import handlers.InputHandler;
-import source.Car;
-import source.Coordinates;
-import source.Mood;
+import exceptions.*;
+import handlers.*;
+import source.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -20,6 +17,7 @@ import java.util.Objects;
 public class AskInput {
     private static boolean CONST_FRIENDLY_INTERFACE;
     private static boolean friendlyInterface;
+    private static ArrayList<String> historyOfFiles = new ArrayList<String>();
 
     /**
      * Метод, позволяющй включить дружественный интерфейс
@@ -396,6 +394,11 @@ public class AskInput {
             try {
                 String fileName = in.readInput();
                 fileInput = new FileInputStream(fileName);
+                if(historyOfFiles.contains(fileName)) {
+                    throw new EndException("Этот файл уже был вызван ранее.\n");
+                } else {
+                    historyOfFiles.add(fileName);
+                }
             } catch (FileNotFoundException e) {
                 if(friendlyInterface && in.getClass() == ConsoleInputHandler.class) {
                     printMessage("Файл не найден. Проверьте корректность указанного пути и повторите попытку.\n");
