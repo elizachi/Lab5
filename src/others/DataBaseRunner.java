@@ -2,6 +2,7 @@ package others;
 
 import service.AskInput;
 import service.CommandManager;
+import service.ReaderManager;
 
 public class DataBaseRunner {
 
@@ -13,7 +14,7 @@ public class DataBaseRunner {
         // Запрос на включение дружественного интерфейса
         AskInput.turnOnFriendly();
         // Включение считывание с консоли
-        CommandManager.turnOnConsole();
+        ReaderManager.turnOnConsole();
         // Определение введённой команды
         CommandManager.whichCommand();
     }

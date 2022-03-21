@@ -3,7 +3,7 @@ package commands;
 import exceptions.EndException;
 import handlers.InputHandler;
 import service.AskInput;
-import service.CommandManager;
+import service.ReaderManager;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -28,6 +28,6 @@ public class ScriptCommand implements Command{
         // если все хорошо создаем BufferedInputStream, при помощи которого будем считывать с файла
         BufferedInputStream bufferedInput = new BufferedInputStream(usableFile);
         // меняем тип считывания на файловый
-        CommandManager.turnOnFile(bufferedInput);
+        ReaderManager.turnOnFile(bufferedInput);
     }
 }

@@ -1,6 +1,6 @@
 package handlers;
 
-import service.CommandManager;
+import service.ReaderManager;
 
 import java.io.*;
 
@@ -29,7 +29,7 @@ public class FileInputHandler extends InputHandler {
                 } else if(i == '\n') break;
             } if(i == -1) {
                 // автоматическое переключение на считывание с консоли тк файл уже закончился
-                CommandManager.turnOnConsole();
+                ReaderManager.turnOnConsole();
                 bufferedInput.close();
             }
         numberOfString++;
