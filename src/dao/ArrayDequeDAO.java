@@ -1,6 +1,5 @@
 package dao;
 
-import service.FileManager;
 import service.Generator;
 import service.HumanComparator;
 import source.HumanBeing;
