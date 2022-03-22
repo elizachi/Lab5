@@ -18,7 +18,6 @@ public class AskInput {
     private static boolean CONST_FRIENDLY_INTERFACE;
     private static boolean friendlyInterface;
     private static ArrayList<String> historyOfFiles = new ArrayList<String>();
-
     /**
      * Метод, позволяющй включить дружественный интерфейс
      */
