@@ -53,9 +53,7 @@ public class FileManager {
             }
 
             String input = bos.toString();
-//            JsonNode node = Xml.parse(input);
-//            DragonDAO out = Json.fromJson(node, DragonDAO.class);
-            return out;
+//            todo сюда парсер
         }
     }
 
