@@ -16,7 +16,5 @@ public interface DAO {
     HumanBeing show();
     void sort();
     LocalDateTime getInitDate();
-    void exit();
-    void save();
 }
 

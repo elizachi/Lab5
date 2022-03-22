@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
-    private FileManager fileManager = new FileManager();
     private static int availableId = 1;
     private final LocalDateTime initDate;
     private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
@@ -23,15 +22,14 @@ public final class ArrayDequeDAO implements DAO {
         return initDate;
     }
 
-    @Override
-    public void save(){
-        fileManager.saveToFile("humanBeings.xml");
-    }
-
-    @Override
-    public void exit(){
-
-    }
+//    @Override
+//    public void save(){
+//        fileManager.saveToFile("humanBeings.xml");
+////    }
+//
+//    @Override
+//    public void exit(){
+//    }
 
     /**
      * Сортировка коллекции
