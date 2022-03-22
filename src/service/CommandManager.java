@@ -46,7 +46,7 @@ public class CommandManager {
             new ShowCommand(database),
             new UpdateCommand(database),
             new SaveCommand(database),
-            new ExitCommand(database)
+            new ExitCommand()
     };
     /**
      * Начало работы определителя команд

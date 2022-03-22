@@ -66,7 +66,7 @@ public class AskInput {
                         System.err.print("Вы ввели пустую строку. Повторите попытку.\n");
                     }
                     command = null;
-                } else if(in != ReaderManager.getReader() && Objects.equals(command, "")) {
+                } else if (in != ReaderManager.getReader() && Objects.equals(command, "")) {
                     throw new JumpReaderException("");
                 } else {
                     throw new EndException("Команду невозможно распознать, она будет проигнорирована.\n");

@@ -17,6 +17,7 @@ public final class ArrayDequeDAO implements DAO {
 
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
+        fileManager.getFromFile();
     }
 
     @Override
@@ -26,13 +27,9 @@ public final class ArrayDequeDAO implements DAO {
 
     @Override
     public void save(){
-        fileManager.saveToFile("humanBeings.xml");
+        fileManager.saveToFile();
     }
 
-    @Override
-    public void exit(){
-
-    }
 
     /**
      * Сортировка коллекции
