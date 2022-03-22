@@ -1,5 +1,6 @@
 Формат ввода команд:
-COMMAND <name> <sountrackName> <minutesOfWaiting> <impactSpeed> <realHero> <hasToothpick>
+COMMAND <name> <sountrackName> <minutesOfWaiting> <impactSpeed> <realHero>
+<hasToothpick> //может быть null
 <x> <y>
 <mood>         //может быть null
 <carName>      //может быть null

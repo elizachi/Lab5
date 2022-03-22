@@ -17,8 +17,9 @@ public class RemoveHeadCommand implements Command{
     @Override
     public void execute(InputHandler reader) {
         if (arrayDequeDAO.size() != 0) {
-            arrayDequeDAO.remove(arrayDequeDAO.show().getId());
             System.out.print("remove_head: элемент " + arrayDequeDAO.show() + " успешно удалён!\n");
+            arrayDequeDAO.remove(arrayDequeDAO.show().getId());
+            arrayDequeDAO.sort();
         } else {
             System.err.print("remove_head: Sorry, коллекция пуста.\n");
         }

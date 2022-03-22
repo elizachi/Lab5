@@ -48,5 +48,6 @@ public class RemoveGreaterCommand implements Command{
             nowHuman = iter.next();
         }
         System.out.print("Элементы, большие заданного, успешно удалены!\n");
+        arrayDequeDAO.sort();
     }
 }

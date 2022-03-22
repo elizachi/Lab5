@@ -14,16 +14,4 @@ public class Developer {
         this.select = select;
         this.delete = delete;
     }
-//    public void insertRecord() {
-//        insert.execute();
-//    }
-//    public void updateRecord() {
-//        update.execute();
-//    }
-//    public void selectRecord() {
-//        select.execute();
-//    }
-//    public void deleteRecord() {
-//        delete.execute();
-//    }
 }

@@ -38,6 +38,7 @@ public class UpdateCommand implements Command {
                 return;
             }
             arrayDequeDAO.update(id, existedHuman);
+            arrayDequeDAO.sort();
             System.out.print("update: Ура ура! Элемент обновлён!\n");
         } else {
             System.err.print("update: Элемента с таким id не нашлось.\n");

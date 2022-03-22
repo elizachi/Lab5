@@ -33,6 +33,7 @@ public class AddCommand implements Command {
             return;
         }
         arrayDequeDAO.add(existedHuman);
+        arrayDequeDAO.sort();
         System.out.print("add: Ура Ура! Элемент добавлен в коллекцию!\n");
     }
 }

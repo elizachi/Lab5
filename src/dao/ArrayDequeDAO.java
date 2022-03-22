@@ -1,17 +1,37 @@
 package dao;
 
-import service.GenerateID;
 import service.Generator;
+import service.HumanComparator;
 import source.HumanBeing;
 
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Deque;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
     private static int availableId = 1;
+    private LocalDateTime initDate;
     private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
     private final Generator generator = new Generator();
+
+    public ArrayDequeDAO() {
+        initDate = LocalDateTime.now();
+    }
+
+    @Override
+    public LocalDateTime getInitDate(){
+        return initDate;
+    }
+
+    /**
+     * Сортировка коллекции
+     */
+    @Override
+    public void sort(){
+        HumanBeing[] humanBeingArray = humanCollection.toArray(new HumanBeing[0]);
+        Arrays.sort(humanBeingArray, new HumanComparator());
+        humanCollection.clear();
+        humanCollection.addAll(Arrays.asList(humanBeingArray));
+    }
 
     /**
      * Добавление нового элемента в коллекцию
