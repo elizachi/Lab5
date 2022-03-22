@@ -3,11 +3,8 @@ package source;
 public class Car implements Comparable {
     private String name; //Поле может быть null
     private boolean cool;
-    private int result;
 
-    public Car(){
 
-    }
     public Car(String name, boolean cool){
         this.name = name;
         this.cool = cool;
@@ -32,13 +29,9 @@ public class Car implements Comparable {
     @Override
     public int compareTo(Object o) {
         Car car = (Car) o;
-        if (name == null) {
+        int result = this.name.compareTo(car.name);
+        if (result == 0){
             result = Boolean.compare(this.cool, car.cool);
-        } else {
-            result = this.name.compareTo(car.name);
-            if (result == 0) {
-                result = Boolean.compare(this.cool, car.cool);
-            }
         }
         return result;
     }

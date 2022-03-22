@@ -6,3 +6,4 @@ public enum Mood {
     GLOOM,
     RAGE
 }
+

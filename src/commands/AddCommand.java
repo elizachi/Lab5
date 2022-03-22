@@ -37,3 +37,4 @@ public class AddCommand implements Command {
         System.out.print("add: Ура Ура! Элемент добавлен в коллекцию!\n");
     }
 }
+

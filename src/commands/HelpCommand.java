@@ -29,3 +29,4 @@ public class HelpCommand implements Command{
                 "print_unique_impact_speed - вывести уникальные значения поля impactSpeed всех элементов в коллекции \n");
     }
 }
+

@@ -15,3 +15,4 @@ public class ConsoleInputHandler extends InputHandler {
         return input;
     }
 }
+

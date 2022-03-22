@@ -19,3 +19,4 @@ public class InfoCommand implements Command {
         System.out.print("info: Коллекция ArrayDeque, создана: " + arrayDequeDAO.getInitDate() + "\n" + "Количество элементов: " + arrayDequeDAO.size() + "\n");
     }
 }
+

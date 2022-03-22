@@ -154,6 +154,7 @@ public class AskInput {
         return input;
     }
 
+
     public Long askMinutesOfWaiting(InputHandler in) throws EndException{
         String input = null;
         while(input == null) {

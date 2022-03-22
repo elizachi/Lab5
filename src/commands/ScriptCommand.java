@@ -31,3 +31,4 @@ public class ScriptCommand implements Command{
         ReaderManager.turnOnFile(bufferedInput);
     }
 }
+

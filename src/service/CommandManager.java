@@ -26,6 +26,7 @@ enum CommandType {
     EXIT;
 }
 
+
 public class CommandManager {
 
     private static final DAO database = new ArrayDequeDAO();

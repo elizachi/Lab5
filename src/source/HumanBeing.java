@@ -34,6 +34,7 @@ public class HumanBeing implements Comparable {
         this.car = car;
     }
 
+
     // геттеры и сеттеры
     public int getId() {
         return id;

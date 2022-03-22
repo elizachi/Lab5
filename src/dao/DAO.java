@@ -19,3 +19,4 @@ public interface DAO {
     void exit();
     void save();
 }
+

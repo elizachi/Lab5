@@ -58,6 +58,7 @@ public final class ArrayDequeDAO implements DAO {
         return availableId++;
     }
 
+
     /**
      * Обновление уже существующего элемента коллекции
      * @param id           - айдишник по которому ищем элемент

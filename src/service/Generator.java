@@ -26,3 +26,4 @@ public class Generator {
         humanBeing.setCreationDate(LocalDate.now());
     }
 }
+

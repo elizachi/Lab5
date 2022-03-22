@@ -12,6 +12,7 @@ public class ReaderManager {
     private static InputHandler reader;
     private static ArrayList<InputHandler> handlers = new ArrayList<>();
 
+
     public static InputHandler getReader() {
         return reader;
     }

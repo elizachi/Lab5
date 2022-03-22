@@ -51,3 +51,4 @@ public class RemoveGreaterCommand implements Command{
         arrayDequeDAO.sort();
     }
 }
+

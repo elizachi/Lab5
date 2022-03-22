@@ -36,3 +36,4 @@ public class FileInputHandler extends InputHandler {
         return word.split(" ")[0];
     }
 }
+
