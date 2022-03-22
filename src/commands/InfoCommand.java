@@ -16,6 +16,6 @@ public class InfoCommand implements Command {
 
     @Override
     public void execute(InputHandler reader) {
-        System.out.print("info: Коллекция ArrayDeque, создана: " + "..." + "\n" + "Количество элементов: " + arrayDequeDAO.size() + "\n");
+        System.out.print("info: Коллекция ArrayDeque, создана: " + arrayDequeDAO.getInitDate() + "\n" + "Количество элементов: " + arrayDequeDAO.size() + "\n");
     }
 }

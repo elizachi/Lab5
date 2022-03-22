@@ -21,7 +21,9 @@ enum CommandType {
     REMOVE_HEAD,
     EXECUTE_SCRIPT,
     SHOW,
-    UPDATE;
+    UPDATE,
+    SAVE,
+    EXIT;
 }
 
 public class CommandManager {
@@ -42,7 +44,9 @@ public class CommandManager {
             new RemoveHeadCommand(database),
             new ScriptCommand(),
             new ShowCommand(database),
-            new UpdateCommand(database)
+            new UpdateCommand(database),
+            new SaveCommand(database),
+            new ExitCommand(database)
     };
     /**
      * Начало работы определителя команд

@@ -2,6 +2,7 @@ package dao;
 
 import source.HumanBeing;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 public interface DAO {
@@ -13,4 +14,8 @@ public interface DAO {
     int size();
     int getAvailableId();
     HumanBeing show();
+    void sort();
+    LocalDateTime getInitDate();
+    void exit();
+    void save();
 }

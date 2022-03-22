@@ -18,6 +18,9 @@ public class HumanBeing implements Comparable {
     private Mood mood; //Поле может быть null
     private Car car; //Поле не может быть null
 
+    public HumanBeing(){
+    }
+
     public HumanBeing(String name, String soundtrackName, Long minutesOfWaiting, int impactSpeed,
                       boolean realHero, Boolean hasToothpick, Coordinates coordinates, Mood mood, Car car) {
         this.name = name;
@@ -134,7 +137,11 @@ public class HumanBeing implements Comparable {
         HumanBeing humanBeing = (HumanBeing) o;
         int result = this.name.compareTo(humanBeing.name);
         if (result == 0) {
-            result = Boolean.compare(this.hasToothpick, humanBeing.hasToothpick);
+            if ((hasToothpick == null) || (humanBeing.hasToothpick == null)) {
+                result = 0;
+            } else {
+                result = Boolean.compare(this.hasToothpick, humanBeing.hasToothpick);
+            }
             if (result == 0) {
                 result = Integer.compare(this.impactSpeed, humanBeing.impactSpeed);
             }
@@ -145,9 +152,13 @@ public class HumanBeing implements Comparable {
                 result = this.minutesOfWaiting.compareTo(humanBeing.minutesOfWaiting);
             }
             if (result == 0) {
-                int ordinalThis = Mood.valueOf(this.mood.toString()).ordinal();
-                int ordinalHumanBeing = Mood.valueOf(humanBeing.mood.toString()).ordinal();
-                result = Integer.compare(ordinalThis, ordinalHumanBeing);
+                if (mood == null || humanBeing.mood == null) {
+                    result=0;
+                } else {
+                    int ordinalThis = Mood.valueOf(this.mood.toString()).ordinal();
+                    int ordinalHumanBeing = Mood.valueOf(humanBeing.mood.toString()).ordinal();
+                    result = Integer.compare(ordinalThis, ordinalHumanBeing);
+                }
             }
             if (result == 0) {
                 result = this.car.compareTo(humanBeing.car);

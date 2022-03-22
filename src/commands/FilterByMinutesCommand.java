@@ -33,7 +33,6 @@ public class FilterByMinutesCommand implements Command{
             }
         } catch (EndException e) {
             System.err.print(e.getMessage());
-            return;
         }
     }
 }

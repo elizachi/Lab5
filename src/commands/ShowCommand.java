@@ -19,6 +19,7 @@ public class ShowCommand implements Command{
         if (arrayDequeDAO.size() == 0) {
             System.err.print("show: Коллекция пустая!\n");
         } else {
+            arrayDequeDAO.sort();
             System.out.print("show: \n");
             for (int i = 0; i < arrayDequeDAO.getAvailableId(); i++) {
                 if (arrayDequeDAO.get(i) != null) {
