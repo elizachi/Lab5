@@ -5,6 +5,9 @@ public class Car implements Comparable {
     private boolean cool;
     private int result;
 
+    public Car(){
+
+    }
     public Car(String name, boolean cool){
         this.name = name;
         this.cool = cool;

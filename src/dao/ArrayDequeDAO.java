@@ -1,5 +1,6 @@
 package dao;
 
+import service.FileManager;
 import service.Generator;
 import service.HumanComparator;
 import source.HumanBeing;
@@ -8,8 +9,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
+    private FileManager fileManager = new FileManager();
     private static int availableId = 1;
-    private LocalDateTime initDate;
+    private final LocalDateTime initDate;
     private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
     private final Generator generator = new Generator();
 
@@ -20,6 +22,16 @@ public final class ArrayDequeDAO implements DAO {
     @Override
     public LocalDateTime getInitDate(){
         return initDate;
+    }
+
+    @Override
+    public void save(){
+        fileManager.saveToFile("humanBeings.xml");
+    }
+
+    @Override
+    public void exit(){
+
     }
 
     /**

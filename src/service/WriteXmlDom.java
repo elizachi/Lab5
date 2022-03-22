@@ -1,39 +1,26 @@
-package others;
-
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import service.AskInput;
-import service.CommandManager;
-import service.ReaderManager;
 import source.Car;
 import source.HumanBeing;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
-public class DataBaseRunner {
+public class WriteXmlDom3 {
 
-    /**
-     * Главный класс
-     * @param args
-     */
-    public static void main(String [] args) throws ParserConfigurationException, TransformerException {
-        // Запрос на включение дружественного интерфейса
-        AskInput.turnOnFriendly();
-        // Включение считывание с консоли
-        ReaderManager.turnOnConsole();
-        // Определение введённой команды
-        CommandManager.whichCommand();
+    public static void main(String[] args)
+            throws ParserConfigurationException, TransformerException {
 
-        //а теперь начинается жесткий парсинг
         HumanBeing human = new HumanBeing();
         Car car = new Car();
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -43,6 +30,11 @@ public class DataBaseRunner {
         Document doc = docBuilder.newDocument();
         Element rootElement = doc.createElement("humanBeing");
         doc.appendChild(rootElement);
+
+        // alternative
+        // Attr attr = doc.createAttribute("id");
+        // attr.setValue("1001");
+        // staff.setAttributeNode(attr);
 
         Element name = doc.createElement("Name");
         name.setTextContent(human.getName());
@@ -87,20 +79,24 @@ public class DataBaseRunner {
 
         // print XML to system console
         writeXml(doc, System.out);
+
     }
-        // write doc to output stream
-        private static void writeXml(Document doc, OutputStream output) throws TransformerException {
 
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
+    // write doc to output stream
+    private static void writeXml(Document doc,
+                                 OutputStream output)
+            throws TransformerException {
 
-            // pretty print
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
 
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(output);
+        // pretty print
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-            transformer.transform(source, result);
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(output);
+
+        transformer.transform(source, result);
 
     }
 }
