@@ -15,6 +15,10 @@ public class DAOXml {
     XmlMapper xmlMapper = new XmlMapper();
     private static String directory;
 
+    /**
+     * метод, устанавливающий директорию файла HumanCollection.xml
+     * @throws IOException
+     */
     public void setDirectory() throws IOException{
         directory = System.getenv().get("DAO_COLLECTION_FILEPATH");
         if (directory == null) {
