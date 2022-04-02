@@ -1,23 +1,27 @@
 package dao;
 
-import service.FileManager;
 import service.Generator;
 import service.HumanComparator;
 import source.HumanBeing;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
-    private FileManager fileManager = new FileManager();
+    private DAOXml daoXml;
     private static int availableId = 1;
     private final LocalDateTime initDate;
-    private final Deque<HumanBeing> humanCollection = new ArrayDeque<>();
+    private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
     private final Generator generator = new Generator();
 
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
-        fileManager.getFromFile();
+        try {
+            humanCollection = daoXml.deserialize();
+        } catch (IOException e) {
+            System.err.print("Коллекция не получена из файла.\n");
+        }
     }
 
     @Override
@@ -27,7 +31,11 @@ public final class ArrayDequeDAO implements DAO {
 
     @Override
     public void save(){
-        fileManager.saveToFile();
+        try {
+            daoXml.serialize();
+        } catch (IOException e) {
+            System.err.print("Возникли ошибки с сохранением коллекции в файл :(\n");
+        }
     }
 
 

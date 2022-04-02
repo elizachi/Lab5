@@ -10,7 +10,7 @@ public class ConsoleInputHandler extends InputHandler {
      */
     @Override
     public String readInput() {
-        // ВНИМАНИЕ!!!! Считывает только первое слово введённой строки. Остальные данные игнорируются.
+        //ВНиМАНиЕ!!!! Считывает только первое слово введённой строки. Остальные данные игнорируются.
         String input = scanner.nextLine().trim().split(" ")[0];
         return input;
     }
