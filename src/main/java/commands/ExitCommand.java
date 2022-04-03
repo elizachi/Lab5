@@ -10,7 +10,6 @@ public class ExitCommand implements Command{
 
     @Override
     public void execute(InputHandler reader) {
-        System.out.print("exit: Программа завершается без сохранения.");
         throw new RuntimeException();
     }
 }

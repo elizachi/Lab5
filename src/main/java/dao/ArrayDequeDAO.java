@@ -21,6 +21,8 @@ public final class ArrayDequeDAO implements DAO {
             daoSerialize.setDirectory();
             DAODeserialize daoDeserialize = new DAODeserialize(humanCollection);
             humanCollection = daoDeserialize.deserialize();
+        } catch (NullPointerException e) {
+            System.err.print("Проблема какая-то с Null, у меня лапки.\n");
         } catch (IOException e) {
             System.err.print("Коллекция не получена из файла.\n");
         }

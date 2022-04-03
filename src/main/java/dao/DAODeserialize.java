@@ -39,7 +39,7 @@ public class DAODeserialize {
         try {
             setDirectory();
         } catch (IOException e) {
-            System.err.print("Технические шоколадки - не получаецца создать коллекцию :(\n");
+            System.err.print("Технические шоколадки - не получаецца получить директорию файла :(\n");
         }
         File file = new File(directory);
         String xml = bufferedInputToString(new FileInputStream(file));

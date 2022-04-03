@@ -11,11 +11,15 @@ public class DataBaseRunner {
      * @param args
      */
     public static void main(String [] args) {
-        // Запрос на включение дружественного интерфейса
-        AskInput.turnOnFriendly();
-        // Включение считывание с консоли
-        ReaderManager.turnOnConsole();
-        // Определение введённой команды
-        CommandManager.whichCommand();
+        try {
+            // Запрос на включение дружественного интерфейса
+            AskInput.turnOnFriendly();
+            // Включение считывание с консоли
+            ReaderManager.turnOnConsole();
+            // Определение введённой команды
+            CommandManager.whichCommand();
+        } catch (RuntimeException e) {
+            System.out.print("exit: Программа завершается без сохранения.");
+        }
     }
 }

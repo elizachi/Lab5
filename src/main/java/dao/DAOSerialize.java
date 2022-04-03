@@ -1,14 +1,15 @@
 package dao;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import source.HumanBeing;
 
 import java.io.*;
+import java.util.Deque;
 import java.util.Map;
 
 /**
  * Класс, который реализует сериализацию xml
  */
 public class DAOSerialize {
-    private final DAO arrayDequeDAO;
     XmlMapper xmlMapper = new XmlMapper();
     private static String directory;
 
@@ -27,8 +28,7 @@ public class DAOSerialize {
         }
     }
 
-    public DAOSerialize(DAO arrayDequeDAO) {
-        this.arrayDequeDAO = arrayDequeDAO;
+    public DAOSerialize() {
         try {
             setDirectory();
         } catch (IOException e) {
@@ -37,7 +37,7 @@ public class DAOSerialize {
     }
 
     public void serialize() throws IOException {
-        xmlMapper.writeValue(new File(directory), arrayDequeDAO.getAll());
+        xmlMapper.writeValue(new File(directory), this);
     }
 
 }
