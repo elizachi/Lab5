@@ -1,4 +1,5 @@
 package dao;
+
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import source.HumanBeing;
 
@@ -7,13 +8,16 @@ import java.util.Deque;
 import java.util.Map;
 
 /**
- * Класс, который реализует сериализацию и десериализацию xml
+ * Класс, который реализует десериализацию xml
  */
-public class DAOXml {
-    private final DAO arrayDequeDAO;
+public class DAODeserialize {
     private Deque<HumanBeing> humanCollection;
     XmlMapper xmlMapper = new XmlMapper();
     private static String directory;
+
+    public DAODeserialize(Deque<HumanBeing> humanCollection) {
+        this.humanCollection = humanCollection;
+    }
 
     /**
      * метод, устанавливающий директорию файла HumanCollection.xml
@@ -31,20 +35,12 @@ public class DAOXml {
         }
     }
 
-    public DAOXml(DAO arrayDequeDAO) {
-        this.arrayDequeDAO = arrayDequeDAO;
+    public Deque<HumanBeing> deserialize() throws IOException {
         try {
             setDirectory();
         } catch (IOException e) {
-            e.getMessage();
+            System.err.print("Технические шоколадки - не получаецца создать коллекцию :(\n");
         }
-    }
-
-    public void serialize() throws IOException {
-        xmlMapper.writeValue(new File(directory), arrayDequeDAO.getAll());
-    }
-
-    public Deque<HumanBeing> deserialize() throws IOException {
         File file = new File(directory);
         String xml = bufferedInputToString(new FileInputStream(file));
         Deque value = xmlMapper.readValue(xml, humanCollection.getClass());
