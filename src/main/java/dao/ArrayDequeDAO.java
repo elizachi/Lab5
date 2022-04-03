@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
-    private DAOSerialize daoSerialize;
     private static int availableId = 1;
     private final LocalDateTime initDate;
     private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
@@ -18,8 +17,8 @@ public final class ArrayDequeDAO implements DAO {
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
         try {
-            daoSerialize.setDirectory();
             DAODeserialize daoDeserialize = new DAODeserialize(humanCollection);
+            daoDeserialize.setDirectory();
             humanCollection = daoDeserialize.deserialize();
         } catch (NullPointerException e) {
             System.err.print("Проблема какая-то с Null, у меня лапки.\n");
@@ -34,12 +33,9 @@ public final class ArrayDequeDAO implements DAO {
     }
 
     @Override
-    public void save(){
-        try {
-            daoSerialize.serialize();
-        } catch (IOException e) {
-            System.err.print("Возникли ошибки с сохранением коллекции в файл :(\n");
-        }
+    public void save() throws IOException {
+        DAOSerialize daoSerialize = new DAOSerialize(humanCollection);
+        daoSerialize.serialize();
     }
 
 

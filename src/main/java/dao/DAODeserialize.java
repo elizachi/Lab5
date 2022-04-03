@@ -24,15 +24,7 @@ public class DAODeserialize {
      * @throws IOException
      */
     public void setDirectory() throws IOException{
-        directory = System.getenv().get("DAO_COLLECTION_FILEPATH");
-        if (directory == null) {
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            Map environment = processBuilder.environment();
-            String path = File.pathSeparator + "HumanCollection" + File.pathSeparator + "HumanCollection.xml";
-            File file = new File(path);
-            file.createNewFile();
-            environment.put("DAO_COLLECTION_FILEPATH", path);
-        }
+        directory = System.getenv("DAO_COLLECTION_FILEPATH");
     }
 
     public Deque<HumanBeing> deserialize() throws IOException {

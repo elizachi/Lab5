@@ -2,6 +2,7 @@ package dao;
 
 import source.HumanBeing;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -16,5 +17,5 @@ public interface DAO {
     HumanBeing show();
     void sort();
     LocalDateTime getInitDate();
-    void save();
+    void save() throws IOException;
 }

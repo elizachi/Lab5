@@ -316,7 +316,7 @@ public class AskInput {
     public Mood askMood(InputHandler in) throws EndException{
         String input = null;
         while(input == null) {
-            printMessage("Введите состояние персонажа: ");
+            printMessage("Введите состояние персонажа (sadness, gloom, longing, rage): ");
             try {
                 input = in.readInput();
                 if(input.isEmpty()) throw new NumberFormatException();

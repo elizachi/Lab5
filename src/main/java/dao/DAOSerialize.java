@@ -12,32 +12,28 @@ import java.util.Map;
 public class DAOSerialize {
     XmlMapper xmlMapper = new XmlMapper();
     private static String directory;
+    private Deque<HumanBeing> humanCollection;
 
     /**
      * метод, устанавливающий директорию файла HumanCollection.xml
      * @throws IOException
      */
     public void setDirectory() throws IOException{
-        directory = System.getenv().get("DAO_COLLECTION_FILEPATH");
-        if (directory == null) {
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            Map environment = processBuilder.environment();
-            String path = File.pathSeparator + "HumanCollection" + File.pathSeparator + "HumanCollection.xml";
-            environment.put("DAO_COLLECTION_FILEPATH", path);
-            setDirectory();
-        }
+        directory = System.getenv("DAO_COLLECTION_FILEPATH");
     }
 
-    public DAOSerialize() {
+    public DAOSerialize(Deque<HumanBeing> humanCollection) {
+        this.humanCollection = humanCollection;
         try {
             setDirectory();
         } catch (IOException e) {
-            System.err.print("Технические шоколадки - не получаецца создать коллекцию :(\n");
+            System.err.print("Технические шоколадки - невозможно обратиться к переменной DAO_COLLECTION_FILEPATH.\n");
         }
     }
 
     public void serialize() throws IOException {
-        xmlMapper.writeValue(new File(directory), this);
+        setDirectory();
+        xmlMapper.writeValue(new File(directory), humanCollection);
     }
 
 }
