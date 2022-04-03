@@ -34,7 +34,7 @@ public final class ArrayDequeDAO implements DAO {
 
     @Override
     public void save() throws IOException {
-        DAOSerialize daoSerialize = new DAOSerialize(humanCollection);
+        DAOSerialize daoSerialize = new DAOSerialize(this);
         daoSerialize.serialize();
     }
 

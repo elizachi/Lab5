@@ -1,5 +1,7 @@
 package dao;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import source.HumanBeing;
 
 import java.io.*;
@@ -12,7 +14,7 @@ import java.util.Map;
 public class DAOSerialize {
     XmlMapper xmlMapper = new XmlMapper();
     private static String directory;
-    private Deque<HumanBeing> humanCollection;
+    private DAO dao;
 
     /**
      * метод, устанавливающий директорию файла HumanCollection.xml
@@ -22,8 +24,8 @@ public class DAOSerialize {
         directory = System.getenv("DAO_COLLECTION_FILEPATH");
     }
 
-    public DAOSerialize(Deque<HumanBeing> humanCollection) {
-        this.humanCollection = humanCollection;
+    public DAOSerialize(DAO dao) {
+        this.dao = dao;
         try {
             setDirectory();
         } catch (IOException e) {
@@ -33,7 +35,9 @@ public class DAOSerialize {
 
     public void serialize() throws IOException {
         setDirectory();
-        xmlMapper.writeValue(new File(directory), humanCollection);
+        xmlMapper.registerModule(new JavaTimeModule());
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        xmlMapper.writeValue(new File(directory), dao.getAll());
     }
 
 }

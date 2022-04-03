@@ -1,11 +1,14 @@
 package source;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class HumanBeing implements Comparable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
     // Значение этого поля должно генерироваться автоматически
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно
     // генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -18,6 +21,7 @@ public class HumanBeing implements Comparable {
     private Mood mood; //Поле может быть null
     private Car car; //Поле не может быть null
 
+    public HumanBeing(){}
 
     public HumanBeing(String name, String soundtrackName, Long minutesOfWaiting, int impactSpeed,
                       boolean realHero, Boolean hasToothpick, Coordinates coordinates, Mood mood, Car car) {

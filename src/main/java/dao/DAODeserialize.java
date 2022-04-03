@@ -1,6 +1,8 @@
 package dao;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import source.HumanBeing;
 
 import java.io.*;
@@ -35,6 +37,8 @@ public class DAODeserialize {
         }
         File file = new File(directory);
         String xml = bufferedInputToString(new FileInputStream(file));
+        xmlMapper.registerModule(new JavaTimeModule());
+        xmlMapper.enable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         Deque value = xmlMapper.readValue(xml, humanCollection.getClass());
         return value;
     }

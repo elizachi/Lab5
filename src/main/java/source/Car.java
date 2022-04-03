@@ -44,14 +44,16 @@ public class Car implements Comparable {
     }
 
     @Override
-    public String toString(){
-        if (getCarName() != null){
-            return getCarName() + ", ";
+    public String toString() {
+        String carInfo = "";
+        if (getCarName() != null) {
+            carInfo += getCarName() + ", ";
         }
-        if (getCarCool()){
-            return "крутая тачка";
+        if (getCarCool()) {
+            carInfo += "крутая тачка";
         } else {
-            return "среднячок";
+            carInfo += "среднячок";
         }
+        return carInfo;
     }
 }
