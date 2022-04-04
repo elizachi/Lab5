@@ -1,12 +1,8 @@
 package dao;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import service.HumanComparator;
 import source.HumanBeing;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,25 +10,13 @@ import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
     private static int availableId = 0;
-    private final LocalDateTime initDate;
+    private LocalDateTime initDate;
+
     private ArrayDeque<HumanBeing> humanCollection = new ArrayDeque<>();
 
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
-        try {
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.registerModule(new JavaTimeModule());
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-            DAODeserialize daoDeserialize = xmlMapper.readValue(new File(System.getenv("DAO_COLLECTION_FILEPATH")), DAODeserialize.class);
-            humanCollection = daoDeserialize.deserialize();
-        } catch (NullPointerException e) {
-            System.err.print("Проблема какая-то с Null, у меня лапки.\n");
-        } catch (IOException e) {
-            System.err.print("Коллекция не получена из файла.\n");
-        } finally {
-            availableId = getAvailableId() + 1;
-        }
+        availableId = getAvailableId() + 1;
     }
 
     @Override
@@ -40,6 +24,17 @@ public final class ArrayDequeDAO implements DAO {
         return initDate;
     }
 
+    public void setInitDate(LocalDateTime initDate) {
+        this.initDate = initDate;
+    }
+
+    public ArrayDeque<HumanBeing> getHumanCollection() {
+        return humanCollection;
+    }
+
+    public void setHumanCollection(ArrayDeque<HumanBeing> humanCollection) {
+        this.humanCollection = humanCollection;
+    }
     @Override
     public void save() throws IOException {
         DAOSerialize daoSerialize = new DAOSerialize(this);
@@ -147,7 +142,7 @@ public final class ArrayDequeDAO implements DAO {
         if (humanCollection.isEmpty()) {
             id = 1;
         } else {
-        id = getMaxId();
+            id = getMaxId();
         }
         return id;
     }

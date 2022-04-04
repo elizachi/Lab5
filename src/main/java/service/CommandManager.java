@@ -1,8 +1,13 @@
 package service;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import commands.*;
 import dao.*;
 import exceptions.*;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Перечисление существующих команд
@@ -28,7 +33,19 @@ enum CommandType {
 
 public class CommandManager {
 
-    private static final DAO database = new ArrayDequeDAO();
+    private static DAO database;
+
+    static {
+        try {
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.registerModule(new JavaTimeModule());
+            DAODeserialize daoDeserialize = xmlMapper.readValue(new File(System.getenv("DAO_COLLECTION_FILEPATH")), DAODeserialize.class);
+
+            database = daoDeserialize.deserialize();
+        } catch (IOException ignored) {
+            database = new ArrayDequeDAO();
+        }
+    }
 
     private static final Command[] commands = {
             new AddCommand(database),
@@ -48,6 +65,7 @@ public class CommandManager {
             new SaveCommand(database),
             new ExitCommand()
     };
+
     /**
      * Начало работы определителя команд
      */
