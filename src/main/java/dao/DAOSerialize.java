@@ -1,12 +1,13 @@
 package dao;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import source.HumanBeing;
 
 import java.io.*;
-import java.util.Deque;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 /**
  * Класс, который реализует сериализацию xml
@@ -16,6 +17,9 @@ public class DAOSerialize {
     private static String directory;
     private final DAO dao;
     private HumanBeing[] humanBeings;
+    @JsonProperty("Time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime initTime;
 
     /**
      * метод, устанавливающий директорию файла HumanCollection.xml
@@ -28,6 +32,7 @@ public class DAOSerialize {
     public DAOSerialize(DAO dao) {
         this.dao = dao;
         humanBeings = dao.getAll().toArray(new HumanBeing[0]);
+        initTime = dao.getInitDate();
         try {
             setDirectory();
         } catch (IOException e) {
@@ -44,5 +49,9 @@ public class DAOSerialize {
 
     public HumanBeing[] getHumanBeings() {
         return humanBeings;
+    }
+
+    public LocalDateTime getInitTime() {
+        return initTime;
     }
 }

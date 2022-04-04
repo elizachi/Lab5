@@ -80,11 +80,11 @@ public class HumanBeing implements Comparable {
         return realHero;
     }
 
-    public void setHasToothpick(boolean hasToothpick) {
+    public void setHasToothpick(Boolean hasToothpick) {
         this.hasToothpick = hasToothpick;
     }
 
-    public boolean isHasToothpick() {
+    public Boolean isHasToothpick() {
         return hasToothpick;
     }
 
