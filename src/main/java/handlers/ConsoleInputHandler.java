@@ -1,5 +1,6 @@
 package handlers;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ConsoleInputHandler extends InputHandler {
@@ -11,7 +12,13 @@ public class ConsoleInputHandler extends InputHandler {
     @Override
     public String readInput() {
         //ВНиМАНиЕ!!!! Считывает только первое слово введённой строки. Остальные данные игнорируются.
-        String input = scanner.nextLine().trim().split(" ")[0];
-        return input;
+        try {
+            String input = scanner.nextLine().trim().split(" ")[0];
+            return input;
+        } catch(NoSuchElementException e) {
+            System.out.print("Куда ты жмал?? Программа завершает свою работу без сохранения данных.\n");
+            System.exit(0);
+        }
+        return null;
     }
 }
