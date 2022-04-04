@@ -34,6 +34,7 @@ public class ReaderManager {
     public static void returnOnPreviousReader() {
         reader = handlers.get(handlers.size()-1);
         AskInput.returnFriendly();
+        AskInput.removeLastHistory();
     }
 
     /**

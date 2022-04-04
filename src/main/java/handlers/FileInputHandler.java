@@ -29,8 +29,8 @@ public class FileInputHandler extends InputHandler {
                 } else if(i == '\n') break;
             } if(i == -1) {
                 // автоматическое переключение на ридер на уровень ниже, т.е. на предыдущий задействованный
-                ReaderManager.returnOnPreviousReader();
                 ReaderManager.removeLast();
+                ReaderManager.returnOnPreviousReader();
             }
         numberOfString++;
         return word.split(" ")[0];

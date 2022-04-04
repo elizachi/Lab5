@@ -18,6 +18,11 @@ public class AskInput {
     private static boolean CONST_FRIENDLY_INTERFACE;
     private static boolean friendlyInterface;
     private static ArrayList<String> historyOfFiles = new ArrayList<String>();
+    private static boolean kostya = false;
+
+    public static void removeLastHistory() {
+        kostya = true;
+    }
     /**
      * Метод, позволяющй включить дружественный интерфейс
      */
@@ -393,7 +398,10 @@ public class AskInput {
             try {
                 String fileName = in.readInput();
                 fileInput = new FileInputStream(fileName);
-                if(historyOfFiles.contains(fileName)) {
+                if(kostya) {
+                    historyOfFiles.remove(fileName);
+                    kostya = false;
+                } else if(historyOfFiles.contains(fileName)){
                     throw new EndException("Этот файл уже был вызван ранее.\n");
                 } else {
                     historyOfFiles.add(fileName);
