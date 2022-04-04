@@ -18,4 +18,5 @@ public interface DAO {
     void sort();
     LocalDateTime getInitDate();
     void save() throws IOException;
+    void clearCollection();
 }

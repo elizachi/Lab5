@@ -1,9 +1,13 @@
 package dao;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import service.Generator;
 import service.HumanComparator;
 import source.HumanBeing;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -17,8 +21,11 @@ public final class ArrayDequeDAO implements DAO {
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
         try {
-            DAODeserialize daoDeserialize = new DAODeserialize(humanCollection);
-            daoDeserialize.setDirectory();
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.registerModule(new JavaTimeModule());
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+            DAODeserialize daoDeserialize = xmlMapper.readValue(new File(System.getenv("DAO_COLLECTION_FILEPATH")), DAODeserialize.class);
             humanCollection = daoDeserialize.deserialize();
         } catch (NullPointerException e) {
             System.err.print("Проблема какая-то с Null, у меня лапки.\n");
@@ -36,6 +43,11 @@ public final class ArrayDequeDAO implements DAO {
     public void save() throws IOException {
         DAOSerialize daoSerialize = new DAOSerialize(this);
         daoSerialize.serialize();
+    }
+
+    @Override
+    public void clearCollection() {
+        humanCollection.clear();
     }
 
 

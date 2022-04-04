@@ -21,11 +21,7 @@ public class ShowCommand implements Command{
         } else {
             arrayDequeDAO.sort();
             System.out.print("show: \n");
-            for (int i = 0; i < arrayDequeDAO.getAvailableId(); i++) {
-                if (arrayDequeDAO.get(i) != null) {
-                    System.out.print(arrayDequeDAO.get(i).toString() + "\n");
-                }
-            }
+            arrayDequeDAO.getAll().forEach(System.out::println);
         }
     }
 }
