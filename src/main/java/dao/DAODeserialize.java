@@ -21,26 +21,10 @@ public class DAODeserialize {
 
     public DAODeserialize() {}
 
-    /**
-     * метод, устанавливающий директорию файла HumanCollection.xml
-     * @throws IOException
-     */
-
-    public Deque<HumanBeing> deserialize() throws IOException {
-        Deque<HumanBeing> deque = new ArrayDeque<>();
+    public ArrayDeque<HumanBeing> deserialize() throws IOException {
+        ArrayDeque<HumanBeing> deque = new ArrayDeque<>();
         Collections.addAll(deque, humanBeings);
         return deque;
-    }
-
-    public String bufferedInputToString(InputStream inputStream) throws IOException{
-        BufferedInputStream buffer = new BufferedInputStream(inputStream);
-        String words = "";
-        int i;
-        while((i = buffer.read()) != -1) {
-            words += (char)i;
-        }
-        buffer.close();
-        return words;
     }
 
     public void setHumanBeings(HumanBeing[] humanBeings) {

@@ -1,13 +1,15 @@
 package source;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class Car implements Comparable {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name; //Поле может быть null
     private boolean cool;
     private int result;
 
-    public Car(){
+    public Car(){}
 
-    }
     public Car(String name, boolean cool){
         this.name = name;
         this.cool = cool;

@@ -12,9 +12,9 @@ import java.util.Map;
  * Класс, который реализует сериализацию xml
  */
 public class DAOSerialize {
-    private XmlMapper xmlMapper = new XmlMapper();
+    private final XmlMapper xmlMapper = new XmlMapper();
     private static String directory;
-    private DAO dao;
+    private final DAO dao;
     private HumanBeing[] humanBeings;
 
     /**

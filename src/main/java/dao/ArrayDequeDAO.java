@@ -3,20 +3,19 @@ package dao;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import service.Generator;
 import service.HumanComparator;
 import source.HumanBeing;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public final class ArrayDequeDAO implements DAO {
-    private static int availableId = 1;
+    private static int availableId = 0;
     private final LocalDateTime initDate;
-    private Deque<HumanBeing> humanCollection = new ArrayDeque<>();
-    private final Generator generator = new Generator();
+    private ArrayDeque<HumanBeing> humanCollection = new ArrayDeque<>();
 
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
@@ -31,6 +30,8 @@ public final class ArrayDequeDAO implements DAO {
             System.err.print("Проблема какая-то с Null, у меня лапки.\n");
         } catch (IOException e) {
             System.err.print("Коллекция не получена из файла.\n");
+        } finally {
+            availableId = getAvailableId() + 1;
         }
     }
 
@@ -70,10 +71,12 @@ public final class ArrayDequeDAO implements DAO {
     @Override
     public int add(HumanBeing newHuman) {
         humanCollection.add(newHuman);
-        generator.generateID(newHuman);
-        generator.generateCreationDate(newHuman);
+        newHuman.setId(availableId);
+        newHuman.setCreationDate(LocalDate.now());
         return availableId++;
     }
+
+
 
     /**
      * Обновление уже существующего элемента коллекции
@@ -134,8 +137,31 @@ public final class ArrayDequeDAO implements DAO {
         return humanCollection.size();
     }
 
+    /**
+     * Метод для уникальности айди, завязанный на полученной из файла коллекции
+     * @return максимальный айди
+     */
     @Override
     public int getAvailableId(){
-        return availableId;
+        int id;
+        if (humanCollection.isEmpty()) {
+            id = 1;
+        } else {
+        id = getMaxId();
+        }
+        return id;
+    }
+
+    public int getMaxId(){
+        ArrayDeque<HumanBeing> cloneCollection = humanCollection.clone();
+        Integer[] ids = new Integer[cloneCollection.size()];
+        int i = 0;
+        int max;
+        while (!(cloneCollection.isEmpty())) {
+            ids[i] = cloneCollection.poll().getId();
+            i++;
+        }
+        max = Collections.max(Arrays.asList(ids));
+        return max;
     }
 }

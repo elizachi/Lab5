@@ -1,6 +1,7 @@
 package source;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -16,8 +17,10 @@ public class HumanBeing implements Comparable {
     private Long minutesOfWaiting; //Поле не может быть null
     private int impactSpeed;
     private boolean realHero;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean hasToothpick; //Поле может быть null
     private Coordinates coordinates; //Поле не может быть null
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Mood mood; //Поле может быть null
     private Car car; //Поле не может быть null
 
