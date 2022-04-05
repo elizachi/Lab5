@@ -13,7 +13,7 @@ public interface DAO {
     HumanBeing get(int id);
     Collection<HumanBeing> getAll();
     int size();
-    int getAvailableId();
+    void setAvailableId();
     HumanBeing show();
     void sort();
     LocalDateTime getInitDate();

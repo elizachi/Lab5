@@ -44,6 +44,8 @@ public class CommandManager {
             database = daoDeserialize.deserialize();
         } catch (IOException ignored) {
             database = new ArrayDequeDAO();
+        } finally {
+            database.setAvailableId();
         }
     }
 

@@ -16,7 +16,6 @@ public final class ArrayDequeDAO implements DAO {
 
     public ArrayDequeDAO() {
         initDate = LocalDateTime.now();
-        availableId = getAvailableId() + 1;
     }
 
     @Override
@@ -137,14 +136,14 @@ public final class ArrayDequeDAO implements DAO {
      * @return максимальный айди
      */
     @Override
-    public int getAvailableId(){
+    public void setAvailableId(){
         int id;
         if (humanCollection.isEmpty()) {
-            id = 1;
+            id = 0;
         } else {
             id = getMaxId();
         }
-        return id;
+        availableId = id + 1;
     }
 
     public int getMaxId(){
